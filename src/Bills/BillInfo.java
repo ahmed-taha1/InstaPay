@@ -1,4 +1,8 @@
 package Bills;
 
-public interface BillInfo {
+public abstract class BillInfo {
+    public abstract double CalculateBillCost();
+
+    public double cost;
+    public  int serialNumber;
 }
