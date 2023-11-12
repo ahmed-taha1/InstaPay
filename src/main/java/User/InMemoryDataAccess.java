@@ -1,6 +1,6 @@
 package User;
 
-public class INMemoryDataAccess implements IUserDataAccess{
+public class InMemoryDataAccess implements IUserDataAccess{
     @Override
     public UserProfile getUserByMobileNumber(String phoneNumber) {
         return null;

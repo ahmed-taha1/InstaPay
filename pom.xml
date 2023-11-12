@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- Add Twilio dependency here -->
         <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
@@ -27,6 +26,5 @@
             <version>1.2.3</version> <!-- Check for the latest version -->
         </dependency>
 
-        <!-- Add other dependencies as needed -->
     </dependencies>
 </project>

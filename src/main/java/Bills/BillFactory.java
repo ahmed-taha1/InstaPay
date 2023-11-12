@@ -14,13 +14,11 @@ public class BillFactory {
         billMapping.put(WATER, new WaterBill());
         billMapping.put(GAS, new GasBill());
     }
-
     static public BillFactory getBillFactoryInstance(){
         if(instance == null)
                 instance = new BillFactory();
         return instance;
     }
-
     public BillInfo createBillStrategy(String billName){
         return billMapping.get(billName);
     }
