@@ -3,7 +3,7 @@ package Transactions.Entities;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
 import BankGateway.PaymentGateway.IBankPaymentGateway;
-import User.Entities.BankUser;
+import Users.Entities.BankUser;
 
 public class TransferToBankAccount implements ITransaction {
     BankUser sender;

@@ -1,6 +1,6 @@
-package User.DataAccess;
+package Users.DataAccess;
 
-import User.Entities.UserProfile;
+import Users.Entities.UserProfile;
 
 public interface IUserDataAccess {
     UserProfile getUserByMobileNumber(String phoneNumber);
