@@ -7,10 +7,10 @@ public class UserProfile {
     protected String password;
     protected String email;
     protected String phoneNumber;
-    protected boolean userType;
-    public static Vector<UserProfile> userProfiles = new Vector<>();
+    protected String userType;
+//    public static Vector<UserProfile> userProfiles = new Vector<>();
 
-    UserProfile(String userName, String password, String email, boolean userType,String phoneNumber){
+    UserProfile(String userName, String password, String email, String userType,String phoneNumber){
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -29,10 +29,10 @@ public class UserProfile {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public Vector<UserProfile> getUsers() {
-        return userProfiles;
-    }
-    public boolean getUserType() {
+//    public Vector<UserProfile> getUsers() {
+//        return userProfiles;
+//    }
+    public String getUserType() {
         return userType;
     }
 
@@ -45,51 +45,8 @@ public class UserProfile {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setUserType(Boolean userType) {
+    public void setUserType(String userType) {
         this. userType = userType;
-    }
-    public String signUp (String userName, String email){
-        String valid ="yes";
-        for(int i = 0; i< userProfiles.size(); i++){
-            UserProfile FU = userProfiles.get(i);
-            String UN = FU.getUserName();
-            String E = FU.getEmail();
-            if(userName.equals(UN) || email.equals(E)){
-                System.out.println("user already exist (name or email)");
-                valid = "no";
-                break;
-            }
-        }
-        return valid;
-    }
-
-    public String signIn (String userName ,String password){
-        String userTypeReturn="";
-        boolean b=true;
-
-
-        for(int i = 0; i< userProfiles.size(); i++){
-            UserProfile FU = userProfiles.get(i);
-            String UN = FU.getUserName();
-            String p = FU.getPassword();
-            if(userName.equals(UN)  && password.equals(p) ){
-                b=FU.getUserType();
-                userTypeReturn="yes";
-                break;
-            }
-        }
-
-        if(userTypeReturn=="yes"){
-            if(b==true){
-                return "admin";
-            }else{
-                return "user";
-            }
-        } //System.out.println("Singed in successfully");
-        else{
-            System.out.println("invalid user name or password");
-            return "not found";
-        }
     }
     
 

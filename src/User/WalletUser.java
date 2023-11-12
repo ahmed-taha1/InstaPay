@@ -1,6 +1,6 @@
 package User;
 
-public class WalletUser {
+public class WalletUser  {
 
     protected UserProfile userProfile;
     WalletUser(UserProfile userProfile){
