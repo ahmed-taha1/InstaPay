@@ -1,4 +1,4 @@
-package Bills.Factory;
+package Bills.Factories;
 
 import Bills.Entities.BillInfo;
 import Bills.Entities.ElectricityBill;

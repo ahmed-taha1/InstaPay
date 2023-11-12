@@ -1,4 +1,4 @@
-package Transactions.Factory;
+package Transactions.Factories;
 
 public class TransactionsFactory {
 }

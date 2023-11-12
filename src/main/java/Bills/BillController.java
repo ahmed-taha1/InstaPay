@@ -2,7 +2,7 @@ package Bills;
 
 
 import Bills.Entities.BillInfo;
-import Bills.Factory.BillFactory;
+import Bills.Factories.BillFactory;
 
 public class BillController {
     private BillInfo billInfo;
