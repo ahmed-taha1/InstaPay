@@ -1,4 +1,4 @@
-package BankGateway.Exceptions;
+package Exceptions;
 
 public class InvalidBalance extends Exception{
     public InvalidBalance(String message){

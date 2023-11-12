@@ -1,7 +1,7 @@
 package Transactions;
 
-import BankGateway.Exceptions.InvalidBalance;
-import BankGateway.Exceptions.NotFound;
+import Exceptions.InvalidBalance;
+import Exceptions.UserNotFound;
 import BankGateway.PaymentGateway.IBankPaymentGateway;
 import User.BankUser;
 
@@ -15,7 +15,7 @@ public class TransferToBankAccount implements ITransaction {
         this.bankPaymentGateway = bankPaymentGateway;
     }
     @Override
-    public void executeTransaction(double amount) throws InvalidBalance, NotFound {
+    public void executeTransaction(double amount) throws InvalidBalance, UserNotFound {
         this.bankPaymentGateway.withdrawMoney(sender.getAccountNumber(),amount);
         this.bankPaymentGateway.depositMoney(receiver.getAccountNumber(),amount);
     }
