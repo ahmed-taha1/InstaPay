@@ -1,4 +1,4 @@
-package Bills;
+package Bills.Entities;
 
 public abstract class BillInfo {
     public abstract double CalculateBillCost();

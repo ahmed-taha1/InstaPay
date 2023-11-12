@@ -1,4 +1,4 @@
-package Transactions;
+package Transactions.Entities;
 
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;

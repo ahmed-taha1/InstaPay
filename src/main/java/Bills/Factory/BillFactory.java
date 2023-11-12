@@ -1,4 +1,9 @@
-package Bills;
+package Bills.Factory;
+
+import Bills.Entities.BillInfo;
+import Bills.Entities.ElectricityBill;
+import Bills.Entities.GasBill;
+import Bills.Entities.WaterBill;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,13 +1,13 @@
-package Transactions;
+package Transactions.Entities;
 
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
-import User.WalletUser;
+import User.Entities.WalletUser;
 
-public class TransferToWalletService implements ITransaction{
+public class TransferToWallet implements ITransaction {
     WalletUser sender;
     WalletUser receiver;
-    public TransferToWalletService(WalletUser sender ,WalletUser receiver){
+    public TransferToWallet(WalletUser sender , WalletUser receiver){
         this.sender = sender;
         this.receiver = receiver;
     }

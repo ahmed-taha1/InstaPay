@@ -1,6 +1,6 @@
-package Transactions;
+package Transactions.DataAccess;
 
-import java.util.Collection;
+import Transactions.Entities.Transaction;
 
 public interface TransactionsDataAccess {
     public Transaction getTransactionByID(int id);

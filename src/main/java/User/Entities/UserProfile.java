@@ -1,4 +1,4 @@
-package User;
+package User.Entities;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package Bills;
+package Bills.Entities;
 
 public class WaterBill extends BillInfo{
     //    add it's private Data

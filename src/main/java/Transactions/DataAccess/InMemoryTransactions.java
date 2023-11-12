@@ -1,9 +1,11 @@
-package Transactions;
+package Transactions.DataAccess;
+import Transactions.Entities.Transaction;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryTransactions implements TransactionsDataAccess{
-    private final Map<Integer,Transaction> transactionsDB ;
+public class InMemoryTransactions implements TransactionsDataAccess {
+    private final Map<Integer, Transaction> transactionsDB ;
     private final static InMemoryTransactions dbInstance = null;
     private InMemoryTransactions(){
         this.transactionsDB = new HashMap<>();

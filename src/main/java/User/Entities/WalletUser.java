@@ -1,4 +1,4 @@
-package User;
+package User.Entities;
 
 public class WalletUser  {
     protected UserProfile userProfile;

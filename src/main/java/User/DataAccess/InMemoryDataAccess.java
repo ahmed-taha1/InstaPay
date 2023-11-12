@@ -1,4 +1,6 @@
-package User;
+package User.DataAccess;
+
+import User.Entities.UserProfile;
 
 public class InMemoryDataAccess implements IUserDataAccess{
     @Override

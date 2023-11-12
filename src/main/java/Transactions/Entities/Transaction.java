@@ -1,4 +1,4 @@
-package Transactions;
+package Transactions.Entities;
 
 import java.util.Date;
 

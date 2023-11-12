@@ -1,9 +1,9 @@
-package Transactions;
+package Transactions.Entities;
 
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
 import BankGateway.PaymentGateway.IBankPaymentGateway;
-import User.BankUser;
+import User.Entities.BankUser;
 
 public class TransferToBankAccount implements ITransaction {
     BankUser sender;

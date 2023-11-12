@@ -1,6 +1,6 @@
-package Bills;
+package Bills.Entities;
 
-public class GasBill extends BillInfo{
+public class ElectricityBill extends BillInfo{
     //    add it's private Data
     @Override
     public double CalculateBillCost() {
