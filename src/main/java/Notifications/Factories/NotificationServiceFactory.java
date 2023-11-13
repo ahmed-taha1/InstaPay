@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class NotificationServiceFactory {
     private static NotificationServiceFactory factoryInstance = null;
-    private final Map<String, INotification> notificationServicesMapping;
+    private Map<String, INotification> notificationServicesMapping;
     private NotificationServiceFactory() {
         this.notificationServicesMapping = new HashMap<>();
         /// todo mapping , might need decorator to return a wrapped factory that recieve params for creating each class
