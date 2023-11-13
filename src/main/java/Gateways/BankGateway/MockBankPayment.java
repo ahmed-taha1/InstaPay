@@ -1,7 +1,7 @@
 package Gateways.BankGateway;
-
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
+import Users.Entities.BankUser;
 import java.util.Map;
 
 public class MockBankPayment implements IBankPaymentGateway{
@@ -12,26 +12,25 @@ public class MockBankPayment implements IBankPaymentGateway{
         mockBankDB.put("20210084",2200.0);
         mockBankDB.put("20210000",5000.0);
     }
-    @Override
-    public void depositMoney(String userBankAccount,double amount) throws UserNotFound {
-        if(mockBankDB.get(userBankAccount) == null){
+    private final BankUser user;
+    public MockBankPayment(BankUser user)throws UserNotFound{
+        if(mockBankDB.get(user.getAccountNumber()) == null){
             throw new UserNotFound("Bank account doesn't exist in mockBank");
         }
-        mockBankDB.put(userBankAccount,amount+mockBankDB.get(userBankAccount));
+        this.user = user;
     }
-    public void withdrawMoney(String userBankAccount,double amount) throws InvalidBalance, UserNotFound {
-        if(mockBankDB.get(userBankAccount) == null){
-            throw new UserNotFound("Bank account doesn't exist in mockBank");
-        }
-        if(mockBankDB.get(userBankAccount) < amount){
+    @Override
+    public void depositMoney(double amount) throws UserNotFound {
+        mockBankDB.put(this.user.getAccountNumber(),mockBankDB.get(this.user.getAccountNumber()) + amount);
+    }
+    public void withdrawMoney(double amount) throws InvalidBalance, UserNotFound {
+        if(mockBankDB.get(user.getAccountNumber()) < amount){
             throw new InvalidBalance("User balance is not suffiecient");
         }
+        mockBankDB.put(this.user.getAccountNumber(),mockBankDB.get(this.user.getAccountNumber()) - amount);
     }
     @Override
-    public double getBalance(String userBankAccount) throws UserNotFound {
-        if(mockBankDB.get(userBankAccount) == null){
-            throw new UserNotFound("Bank account doesn't exist in mockBank");
-        }
-        return mockBankDB.get(userBankAccount);
+    public double getBalance() throws UserNotFound {
+        return mockBankDB.get(user.getAccountNumber());
     }
 }

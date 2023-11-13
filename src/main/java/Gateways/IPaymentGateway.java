@@ -1,10 +1,9 @@
-package Gateways.BankGateway;
+package Gateways;
 
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
-import Gateways.IPaymentGateway;
 
-public interface IBankPaymentGateway extends IPaymentGateway {
+public interface IPaymentGateway {
     public void depositMoney(double amount) throws UserNotFound;
     public void withdrawMoney(double amount) throws InvalidBalance, UserNotFound;
     public double getBalance() throws UserNotFound;

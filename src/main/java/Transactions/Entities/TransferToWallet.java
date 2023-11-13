@@ -1,22 +1,21 @@
 package Transactions.Entities;
 
+import Authentication.Exceptions.UnAuthorized;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
+import Gateways.IPaymentGateway;
 import Gateways.WalletProviderGateway.WalletPaymentGateway.IWalletProviderPaymentGateway;
-import Users.Entities.WalletUser;
 
 public class TransferToWallet implements ITransaction {
-    WalletUser sender;
-    WalletUser receiver;
-    IWalletProviderPaymentGateway walletProviderPaymentGateway;
-    public TransferToWallet(WalletUser sender , WalletUser receiver,IWalletProviderPaymentGateway walletProviderPaymentGateway){
-        this.sender = sender;
-        this.receiver = receiver;
-        this.walletProviderPaymentGateway = walletProviderPaymentGateway;
+    IPaymentGateway senderGateway;
+    IWalletProviderPaymentGateway receiverGateway;
+    public TransferToWallet(IPaymentGateway senderGateway,IWalletProviderPaymentGateway walletProviderPaymentGateway){
+        this.senderGateway = senderGateway;
+        this.receiverGateway = walletProviderPaymentGateway;
     }
     @Override
-    public void executeTransaction(double amount) throws InvalidBalance, UserNotFound {
-        this.walletProviderPaymentGateway.withdrawMoney(sender.getPhoneNumber(),amount);
-        this.walletProviderPaymentGateway.depositMoney(sender.getPhoneNumber(),amount);
+    public void executeTransaction(double amount) throws UnAuthorized,InvalidBalance, UserNotFound {
+        this.senderGateway.withdrawMoney(amount);
+        this.receiverGateway.depositMoney(amount);
     }
 }
