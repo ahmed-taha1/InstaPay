@@ -2,8 +2,8 @@ package Transactions.Entities;
 
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
+import Gateways.WalletProviderGateway.WalletPaymentGateway.IWalletProviderPaymentGateway;
 import Users.Entities.WalletUser;
-import WalletProviderGateway.PaymentGateway.IWalletProviderPaymentGateway;
 
 public class TransferToWallet implements ITransaction {
     WalletUser sender;

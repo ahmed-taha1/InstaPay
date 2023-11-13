@@ -1,9 +1,6 @@
 package Transactions.Factories;
 
 import Transactions.Entities.ITransaction;
-import Transactions.Entities.TransactionType;
-import Transactions.Entities.TransferToBankAccount;
-import Transactions.Entities.TransferToWallet;
 
 import java.util.HashMap;
 import java.util.Map;
