@@ -5,12 +5,13 @@ public class UserProfile {
     private final String password;
     private final String phoneNumber;
     private final String userType;
-
-    UserProfile(String userName, String password, String email, String userType,String phoneNumber){
+    private boolean isVerified;
+    UserProfile(String userName, String password, String email, String userType, String phoneNumber){
         this.userName = userName;
         this.password = password;
         this. userType = userType;
         this. phoneNumber = phoneNumber;
+        this.isVerified = false;
     }
     public String getUserName() {
         return userName;
@@ -23,5 +24,8 @@ public class UserProfile {
     }
     public String getUserType() {
         return userType;
+    }
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }

@@ -2,6 +2,7 @@ package Gateways.BankGateways.MockGateways;
 
 import Authentication.Exceptions.InvalidCredentials;
 import Authentication.Exceptions.UnAuthenticated;
+import Authentication.Exceptions.UserNotFound;
 import Gateways.IAuthenticationGateway;
 import OTPGenerator.RandomGenerator;
 
@@ -20,9 +21,15 @@ public class MockBankAuthenticationGateway implements IAuthenticationGateway {
         sendVerificationCode();
     }
     @Override
-    public void verifyCode(String code) {
+    public void verifyCode(String code) throws UserNotFound, UnAuthenticated {
+        String storedCode =  MockBankDB.getUserVerificationCode(bankAccount);
+        if(!storedCode.equals(code)){
+            throw new UnAuthenticated("OTP doesn't match last sent code");
+        }
     }
     private void sendVerificationCode(){
-        MockBankDB.storeVerificationCode(this.bankAccount, RandomGenerator.generateOTPCode());
+        String verificationCOde = RandomGenerator.generateOTPCode();
+        System.out.println(verificationCOde);
+        MockBankDB.storeVerificationCode(this.bankAccount, verificationCOde);
     }
 }
