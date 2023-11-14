@@ -1,12 +1,12 @@
-package Gateways.WalletProviderGateway.WalletPaymentGateway;
-
+package PaymentGateways.WalletPaymentGateway;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
+import PaymentGateways.IPaymentGateway;
 import Users.Entities.WalletUser;
 
 import java.util.Map;
 
-public class MockWalletPayment implements IWalletProviderPaymentGateway{
+public class MockWalletPaymentGateway implements IPaymentGateway {
     private static Map<String,Double> mockWalletProviderGateway;
     private static void seedMockDB(){
         mockWalletProviderGateway.put("20210069",10000.0);
@@ -15,7 +15,7 @@ public class MockWalletPayment implements IWalletProviderPaymentGateway{
         mockWalletProviderGateway.put("20210000",5000.0);
     }
     private final WalletUser user;
-    public MockWalletPayment(WalletUser user)throws UserNotFound{
+    public MockWalletPaymentGateway(WalletUser user)throws UserNotFound{
         if(mockWalletProviderGateway.get(user.getPhoneNumber()) == null){
             throw new UserNotFound("Wallet Provider account doesn't exist in mockBank");
         }

@@ -1,4 +1,4 @@
-package Gateways;
+package AuthenticationGateway;
 
 public interface IAuthenticationGateway {
 }

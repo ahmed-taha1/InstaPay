@@ -1,22 +1,23 @@
 package Transactions.Entities;
 
 import Authentication.Exceptions.UnAuthorized;
-import Authentication.IAuthorizer;
-import Authentication.TransactionAuthorizer;
+import Authentication.TransferAuthorizer;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 
-public class TransferToInstaPayAccount extends ITransaction{
+public class TransferToInstaPayAccount implements ITransaction{
     private final IPaymentGateway senderGateway;
     private final IPaymentGateway receiverGateway;
-    public TransferToInstaPayAccount(TransactionAuthorizer authorizer, IPaymentGateway senderGateway, IPaymentGateway receiverGateway){
-        super(authorizer);
+    private final TransferAuthorizer authorizer;
+    public TransferToInstaPayAccount(TransferAuthorizer authorizer, IPaymentGateway senderGateway, IPaymentGateway receiverGateway){
+        this.authorizer = authorizer;
         this.senderGateway = senderGateway;
         this.receiverGateway = receiverGateway;
     }
     @Override
-    public void transaction(double amount) throws InvalidBalance, UserNotFound {
+    public void executeTransaction(double amount) throws UnAuthorized,InvalidBalance, UserNotFound {
+        this.authorizer.validateAction();
         senderGateway.withdrawMoney(amount);
         receiverGateway.depositMoney(amount);
     }

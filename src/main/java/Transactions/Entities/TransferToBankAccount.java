@@ -1,19 +1,21 @@
 package Transactions.Entities;
 
 import Authentication.Exceptions.UnAuthorized;
-import Authentication.TransactionAuthorizer;
+import Authentication.TransferAuthorizer;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
-import Gateways.BankGateway.IBankPaymentGateway;
-import Users.Entities.BankUser;
+import PaymentGateways.IPaymentGateway;
 
-public class TransferToBankAccount extends ITransaction {
-    IBankPaymentGateway bankPaymentGateway;
-    public TransferToBankAccount(TransactionAuthorizer authorizer, IBankPaymentGateway bankPaymentGateway){
-        super(authorizer);
+public class TransferToBankAccount implements ITransaction {
+    TransferAuthorizer authorizer;
+    IPaymentGateway bankPaymentGateway;
+    public TransferToBankAccount(TransferAuthorizer authorizer, IPaymentGateway bankPaymentGateway){
+        this.authorizer = authorizer;
         this.bankPaymentGateway = bankPaymentGateway;
     }
-    public void transaction(double amount) throws InvalidBalance, UserNotFound {
+    @Override
+    public void executeTransaction(double amount) throws UnAuthorized, InvalidBalance, UserNotFound {
+        authorizer.validateAction();
         this.bankPaymentGateway.withdrawMoney(amount);
         this.bankPaymentGateway.depositMoney(amount);
     }

@@ -1,10 +1,11 @@
-package Gateways.BankGateway;
+package PaymentGateways.BankPaymentGateway;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
+import PaymentGateways.IPaymentGateway;
 import Users.Entities.BankUser;
 import java.util.Map;
 
-public class MockBankPayment implements IBankPaymentGateway{
+public class MockBankPaymentGateway implements IPaymentGateway {
     private static Map<String,Double> mockBankDB;
     private static void seedMockDB(){
         mockBankDB.put("20210069",10000.0);
@@ -13,7 +14,7 @@ public class MockBankPayment implements IBankPaymentGateway{
         mockBankDB.put("20210000",5000.0);
     }
     private final BankUser user;
-    public MockBankPayment(BankUser user)throws UserNotFound{
+    public MockBankPaymentGateway(BankUser user)throws UserNotFound{
         if(mockBankDB.get(user.getAccountNumber()) == null){
             throw new UserNotFound("Bank account doesn't exist in mockBank");
         }
