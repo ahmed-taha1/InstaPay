@@ -1,5 +1,7 @@
 package Transactions.Entities;
 
+import Authentication.Exceptions.UnAuthorized;
+import Authentication.IAuthorizer;
 import Authentication.TransactionAuthorizer;
 import Exceptions.InvalidBalance;
 import Exceptions.UserNotFound;
