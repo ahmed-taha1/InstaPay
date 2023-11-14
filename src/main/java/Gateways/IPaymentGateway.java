@@ -1,5 +1,4 @@
 package Gateways;
-
 import Transactions.Exceptions.InvalidBalance;
 import Authentication.Exceptions.UserNotFound;
 
