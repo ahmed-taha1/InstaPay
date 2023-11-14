@@ -1,34 +1,30 @@
 package Bills.Factories;
 
-import Bills.Entities.BillInfo;
-import Bills.Entities.ElectricityBill;
-import Bills.Entities.GasBill;
-import Bills.Entities.WaterBill;
+import Bills.*;
+import Bills.Entities.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BillFactory {
-    public static String ELECTRICITY = "electricity bill";
-    public static String WATER = "water bill";
-    public static String GAS = "gas bill";
     private static BillFactory instance = null;
-    private final Map<String, BillInfo> billMapping = new HashMap<>();
+    private final Map<Integer, BillInfo> billMapping;
     BillFactory(){
-        billMapping.put(ELECTRICITY, new ElectricityBill());
-        billMapping.put(WATER, new WaterBill());
-        billMapping.put(GAS, new GasBill());
+        billMapping = new HashMap<>();
+        billMapping.put(BillsTypes.ELECTRICITY_BILL.getIndex(), new ElectricityBill());
+        billMapping.put(BillsTypes.GAS_BILL.getIndex(), new WaterBill());
+        billMapping.put(BillsTypes.WATER_BILL.getIndex(), new GasBill());
     }
     static public BillFactory getBillFactoryInstance(){
         if(instance == null)
                 instance = new BillFactory();
         return instance;
     }
-    public BillInfo createBillStrategy(String billName){
-        return billMapping.get(billName);
+    public BillInfo createBillStrategy(int billNumber){
+        return billMapping.get(billNumber);
     }
-
-    public String[] getAvailableBills(){
-        return billMapping.keySet().toArray(new String[0]);
+    public ArrayList<String> getAvailableBills(){
+        return BillsTypes.getBillsTypes();
     }
 }
