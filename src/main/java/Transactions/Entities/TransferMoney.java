@@ -1,9 +1,9 @@
 package Transactions.Entities;
 import Authentication.Exceptions.UnAuthorized;
 import Authentication.TransferAuthorizer;
-import Exceptions.InvalidBalance;
-import Exceptions.UserNotFound;
-import PaymentGateways.IPaymentGateway;
+import Transactions.Exceptions.InvalidBalance;
+import Authentication.Exceptions.UserNotFound;
+import Gateways.IPaymentGateway;
 
 public class TransferMoney implements ITransaction{
     IPaymentGateway senderGateway;

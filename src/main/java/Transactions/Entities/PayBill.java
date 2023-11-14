@@ -1,8 +1,8 @@
 package Transactions.Entities;
 import Authentication.Exceptions.UnAuthorized;
-import Exceptions.InvalidBalance;
-import Exceptions.UserNotFound;
-import PaymentGateways.IPaymentGateway;
+import Transactions.Exceptions.InvalidBalance;
+import Authentication.Exceptions.UserNotFound;
+import Gateways.IPaymentGateway;
 
 public class PayBill implements ITransaction {
     IPaymentGateway paymentGateway;

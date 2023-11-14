@@ -1,7 +1,7 @@
 package PaymentGateways;
 
-import Exceptions.InvalidBalance;
-import Exceptions.UserNotFound;
+import Transactions.Exceptions.InvalidBalance;
+import Authentication.Exceptions.UserNotFound;
 
 public interface IPaymentGateway {
     public void depositMoney(double amount) throws UserNotFound;
