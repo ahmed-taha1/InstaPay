@@ -3,6 +3,7 @@ package Users.DataAccess;
 import Users.Entities.UserProfile;
 
 public interface IUserDataAccess {
-    UserProfile getUserByMobileNumber(String phoneNumber);
-    UserProfile getUserByUserName(String Name);
+    public UserProfile getUserByMobileNumber(String phoneNumber);
+    public UserProfile getUserByUserName(String Name);
+    public void createUser(UserProfile userProfile);
 }

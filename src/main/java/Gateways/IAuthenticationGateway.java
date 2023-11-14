@@ -5,4 +5,5 @@ import Authentication.Exceptions.UnAuthenticated;
 
 public interface IAuthenticationGateway {
     public void authenticate()throws UnAuthenticated, InvalidCredentials;
+    public void verifyCode(String code);
 }
