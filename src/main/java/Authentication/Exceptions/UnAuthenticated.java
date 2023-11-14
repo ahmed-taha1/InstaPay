@@ -1,7 +1,7 @@
 package Authentication.Exceptions;
 
-public class UserNotFound extends Exception{
-    public UserNotFound(String message){
+public class UnAuthenticated extends Exception{
+    public UnAuthenticated(String message){
         super(message);
     }
     @Override

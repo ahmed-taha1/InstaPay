@@ -1,8 +1,7 @@
-package PaymentGateways.WalletPaymentGateway;
+package Gateways.WalletProviderGateways;
 import Transactions.Exceptions.InvalidBalance;
 import Authentication.Exceptions.UserNotFound;
-import PaymentGateways.IPaymentGateway;
-import Users.Entities.WalletUser;
+import Gateways.IPaymentGateway;
 
 import java.util.Map;
 
@@ -15,24 +14,24 @@ public class MockWalletPaymentGateway implements IPaymentGateway {
         mockWalletProviderGateway.put("20210084",2200.0);
         mockWalletProviderGateway.put("20210000",5000.0);
     }
-    public MockWalletPaymentGateway(WalletUser userPhoneNumber)throws UserNotFound{
-        if(mockWalletProviderGateway.get(userPhoneNumber.getPhoneNumber()) == null){
+    public MockWalletPaymentGateway(String userPhoneNumber)throws UserNotFound{
+        if(mockWalletProviderGateway.get(userPhoneNumber) == null){
             throw new UserNotFound("Wallet Provider account doesn't exist in mockBank");
         }
         this.userPhoneNumber = userPhoneNumber;
     }
     @Override
     public void depositMoney(double amount) throws UserNotFound {
-        mockWalletProviderGateway.put(this.userPhoneNumber.getPhoneNumber(), mockWalletProviderGateway.get(this.userPhoneNumber.getPhoneNumber()) + amount);
+        mockWalletProviderGateway.put(this.userPhoneNumber, mockWalletProviderGateway.get(this.userPhoneNumber) + amount);
     }
     public void withdrawMoney(double amount) throws InvalidBalance, UserNotFound {
-        if(mockWalletProviderGateway.get(userPhoneNumber.getPhoneNumber()) < amount){
+        if(mockWalletProviderGateway.get(userPhoneNumber) < amount){
             throw new InvalidBalance("User balance is not suffiecient");
         }
-        mockWalletProviderGateway.put(this.userPhoneNumber.getPhoneNumber(), mockWalletProviderGateway.get(this.userPhoneNumber.getPhoneNumber()) - amount);
+        mockWalletProviderGateway.put(this.userPhoneNumber, mockWalletProviderGateway.get(this.userPhoneNumber) - amount);
     }
     @Override
     public double getBalance() throws UserNotFound {
-        return mockWalletProviderGateway.get(userPhoneNumber.getPhoneNumber());
+        return mockWalletProviderGateway.get(userPhoneNumber);
     }
 }

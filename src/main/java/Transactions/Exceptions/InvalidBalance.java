@@ -1,4 +1,4 @@
-package Exceptions;
+package Transactions.Exceptions;
 
 public class InvalidBalance extends Exception{
     public InvalidBalance(String message){
