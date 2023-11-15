@@ -41,8 +41,8 @@ public class SpringBootInstapayProjectApplication {
 		System.out.println("please choose option");
 		System.out.println("1- Signup");
 		System.out.println("2- Login");
-		Stri choose = Integer.parseInt(new Scanner(System.in).nextLine());
-		if(choose == 1){
+		String choose = new Scanner(System.in).nextLine();
+		if(choose == "1"){
 			signup();
 		}
 		else{
@@ -50,12 +50,14 @@ public class SpringBootInstapayProjectApplication {
 		}
 	}
 	public static void login() throws UserNotFound, UnAuthenticated, InvalidBalance, UnAuthorized {
-		System.out.println("Enter Your Phone Number");
-		new Scanner(System.in).nextLine();
+		System.out.println("Enter Your Phone Number:");
+		new Scanner(System.in).next();
 		String phoneNumber = new Scanner(System.in).nextLine();
 		System.out.println("Enter your userName:");
+		new Scanner(System.in).next();
 		String userName = new Scanner(System.in).nextLine();
 		System.out.println("Enter Password");
+		new Scanner(System.in).next();
 		String password = new Scanner(System.in).nextLine();
 		User user = userDataAccess.getUserByUserName(userName);
 		if(user == null){
@@ -71,19 +73,25 @@ public class SpringBootInstapayProjectApplication {
 	public static void signup(){
 		String userName = new Scanner(System.in).nextLine();
 		System.out.println("Enter your userName: ");
+		new Scanner(System.in).next();
 
 		if(userDataAccess.getUserByUserName(userName) != null){
 			System.out.println("user already exist");
+			new Scanner(System.in).next();
 			return;
 		}
 		System.out.println("Enter password: ");
+		new Scanner(System.in).next();
 		String password = new Scanner(System.in).nextLine();
 
 		System.out.println("Enter you phone Number: ");
+		new Scanner(System.in).next();
 		String phoneNumber = new Scanner(System.in).nextLine();
 		System.out.println("OTP sent");
+		new Scanner(System.in).next();
 
 		System.out.println("Bank user type(1) or wallet user type(2)? : ");
+		new Scanner(System.in).next();
 
 		int choose = new Scanner(System.in).nextInt();
 
@@ -103,6 +111,7 @@ public class SpringBootInstapayProjectApplication {
 		System.out.println("3-Transfer To InstaPayUser");
 		System.out.println("4-Pay Bill");
 		System.out.println("5-Inquire About Balance");
+		new Scanner(System.in).next();
 		int choice = new Scanner(System.in).nextInt();
 		if(choice == 1){
 			transferToBankAccount();
@@ -118,8 +127,10 @@ public class SpringBootInstapayProjectApplication {
 	}
 	public static void transferToBankAccount() throws UserNotFound, UnAuthorized, InvalidBalance {
 		System.out.println("Please Enter Receiver Phone Number:");
+		new Scanner(System.in).next();
 		String phoneNumber = new Scanner(System.in).nextLine();
 		System.out.println("Please Enter The amount to transfer");
+		new Scanner(System.in).next();
 		Double amount = new Scanner(System.in).nextDouble();
 		User receiver = userDataAccess.getUserByMobileNumber(phoneNumber);
 		TransferAuthorizer authorizer = new TransferAuthorizer(activeUser.getUserType(),receiver.getUserType());
@@ -135,9 +146,11 @@ public class SpringBootInstapayProjectApplication {
 
 	public static void transferToWalletUser()  throws UnAuthorized, InvalidBalance, UserNotFound{
 		System.out.println("please enter receiver phone number");
+		new Scanner(System.in).next();
 		String receiverPhoneNumber = new Scanner(System.in).nextLine();
 
 		System.out.println("please enter the amount");
+		new Scanner(System.in).next();
 		double amount = new Scanner(System.in).nextDouble();
 
 		User receiver = userDataAccess.getUserByMobileNumber(receiverPhoneNumber);
@@ -160,8 +173,10 @@ public class SpringBootInstapayProjectApplication {
 
 	public static void transferToInstaPay() throws UnAuthorized, InvalidBalance, UserNotFound{
 		System.out.println("Please Enter Receiver UserName:");
+		new Scanner(System.in).next();
 		String userName = new Scanner(System.in).nextLine();
 		System.out.println("Please Enter The amount to transfer");
+		new Scanner(System.in).next();
 		Double amount = new Scanner(System.in).nextDouble();
 		User receiver = userDataAccess.getUserByUserName(userName);
 		TransferAuthorizer authorizer = new TransferAuthorizer(activeUser.getUserType(),receiver.getUserType());
@@ -175,11 +190,13 @@ public class SpringBootInstapayProjectApplication {
 	}
 	public static void payBill(){
 		System.out.println("please choose providor");
+		new Scanner(System.in).next();
 		ArrayList<String> billsTypes = BillsTypes.getBillsTypes();
 		for(int i = 0; i < billsTypes.size(); i++){
 			System.out.println((i + 1) + "- " + billsTypes.get(i));
 		}
 		System.out.print(">> ");
+		new Scanner(System.in).next();
 		int choose = new Scanner(System.in).nextInt();
 		BillFactory billFactory = BillFactory.getBillFactoryInstance();
 		BillInfo bill = billFactory.createBillStrategy(choose);
@@ -197,12 +214,14 @@ public class SpringBootInstapayProjectApplication {
 				throw new RuntimeException(e);
 			}
 			System.out.println("your balance is" + amount);
+			new Scanner(System.in).next();
 		}
 		else{
 			MockWalletPayementGateway mockWalletPayementGatey = new MockWalletPayementGateway(activeUser.getPhoneNumber());
 			try {
 				double amount = mockWalletPayementGatey.getBalance();
 				System.out.println("your balance is" + amount);
+				new Scanner(System.in).next();
 			} catch (UserNotFound e) {
 				throw new RuntimeException(e);
 			}
