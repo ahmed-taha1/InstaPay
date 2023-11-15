@@ -11,7 +11,8 @@ public class BankUser extends User{
 
         userType = "bank";
     }
-    public String getAccountNumber() {
+
+    public  String getAccountNumber() {
         return bankAccountNumber;
     }
 }

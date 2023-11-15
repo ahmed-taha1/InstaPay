@@ -1,31 +1,43 @@
 package InstaPay.SW.spring_boot_instapay_project.Transactions.Factories;
 
 
+import InstaPay.SW.spring_boot_instapay_project.Authentication.TransferAuthorizer;
+import InstaPay.SW.spring_boot_instapay_project.Gateways.IPaymentGateway;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.ITransaction;
+import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.PayBill;
+import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.TransactionType;
+import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.TransferMoney;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class TransactionsFactory {
     private static TransactionsFactory transactionsFactoryInstance;
-    private static Map<String, ITransaction> transactionMapping;
+    private Map<String, Function<Map<String, Object>, ITransaction>> transactionMapping;
     private TransactionsFactory(){
         transactionMapping = new HashMap<>();
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToBankAccount());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToWallet());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToInstapay());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new PayBill());
+        transactionMapping.put("transferMoney", this::creteTransferMoneyInstance);
+        transactionMapping.put("payBill", this::createPayBillsInstance);
     }
+
     public static TransactionsFactory getInstance() {
         if(transactionsFactoryInstance == null){
             transactionsFactoryInstance = new TransactionsFactory();
         }
         return transactionsFactoryInstance;
     }
-    public ITransaction createTransaction(String transactionType){
-        return transactionMapping.get(transactionType);
+    public ITransaction createTransaction(String transactionType, Map<String, Object> map){
+        Function<Map<String, Object>, ITransaction> transactionFunction = transactionMapping.get(transactionType);
+        if (transactionFunction != null) {
+            return transactionFunction.apply(map);
+        }
+        return null;
     }
-
-    // TODO get transaction type as array list from the enum (handle each user type menu)
+    private ITransaction creteTransferMoneyInstance(Map<String, Object> attr){
+        return new TransferMoney((IPaymentGateway) attr.get("senderGateway"), (IPaymentGateway) attr.get("receiverGateway"), (TransferAuthorizer) attr.get("authorizer"));
+    }
+    private ITransaction createPayBillsInstance(Map<String, Object> attr){
+        return new PayBill((IPaymentGateway) attr.get("paymentGateway"));
+    }
 }

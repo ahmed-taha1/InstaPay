@@ -17,6 +17,15 @@ public class Transaction {
         this.type = type;
         this.creationDate = creationDate;
     }
+
+    public Transaction(int id, double amount, String senderPhone, String receiver, TransactionType type, Date creationDate) {
+        this.ID = id;
+        this.amount = amount;
+        this.senderPhone = senderPhone;
+        this.receiver = receiver;
+        this.type = type;
+        this.creationDate = creationDate;
+    }
     public int getID() {
         return ID;
     }

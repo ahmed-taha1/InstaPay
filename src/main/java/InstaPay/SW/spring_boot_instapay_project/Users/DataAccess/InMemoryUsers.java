@@ -7,16 +7,22 @@ import InstaPay.SW.spring_boot_instapay_project.Users.Entities.WalletUser;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class InMemoryDataAccess implements IUserDataAccess {
-    ArrayList<User> users;
-    public InMemoryDataAccess() {
+public class InMemoryUsers implements IUserDataAccess {
+    static InMemoryUsers inMemoryDataAccessInstance = null;
+
+    private ArrayList<User> users;
+    private InMemoryUsers() {
         this.users = new ArrayList<>();
-        User user1 = new WalletUser("user1", "password1",  "1234567890", "VF cash");
-        User user2 = new BankUser("user2", "password2", "9876543210", "12354685");
-        users.add(user1);
-        users.add(user2);
+        users.add(new WalletUser("user1", "password1",  "1234567890", "VF cash"));
+        users.add(new BankUser("user2", "password2", "9876543210", "12354685"));
     }
 
+    public static InMemoryUsers getInstance() {
+        if(inMemoryDataAccessInstance == null){
+            inMemoryDataAccessInstance = new InMemoryUsers();
+        }
+        return inMemoryDataAccessInstance;
+    }
     @Override
     public User getUserByMobileNumber(String phoneNumber) {
         for(User i:users){
@@ -37,5 +43,11 @@ public class InMemoryDataAccess implements IUserDataAccess {
         }
         return null;
     }
+
+    @Override
+    public void createUser(User userProfile){
+        users.add(userProfile);
+    }
+
 
 }

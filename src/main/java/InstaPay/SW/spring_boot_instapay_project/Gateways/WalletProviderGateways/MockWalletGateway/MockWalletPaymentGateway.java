@@ -32,7 +32,7 @@ public class MockWalletPaymentGateway implements IPaymentGateway {
         mockWalletProviderGateway.put(this.userPhoneNumber, mockWalletProviderGateway.get(this.userPhoneNumber) - amount);
     }
     @Override
-    public double getBalance() throws UserNotFound {
+    public double  getBalance() throws UserNotFound {
         return mockWalletProviderGateway.get(userPhoneNumber);
     }
 }

@@ -10,6 +10,7 @@ public class TransferMoney implements ITransaction{
     IPaymentGateway senderGateway;
     IPaymentGateway receiverGateway;
     TransferAuthorizer authorizer;
+
     public TransferMoney(IPaymentGateway senderGateway, IPaymentGateway receiverGateway, TransferAuthorizer authorizer) {
         this.senderGateway = senderGateway;
         this.receiverGateway = receiverGateway;
