@@ -2,7 +2,7 @@ package InstaPay.SW.spring_boot_instapay_project.Authentication;
 
 
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UnAuthorized;
-import InstaPay.SW.spring_boot_instapay_project.Users.Entities.UserProfile;
+import InstaPay.SW.spring_boot_instapay_project.Users.Entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class TransferAuthorizer {
     private final Map<String, List<String>> validActionsMapper;
-    private final UserProfile sender;
-    private final UserProfile receiver;
+    private final User sender;
+    private final User receiver;
     private void addActions(){
         validActionsMapper.put("bank",getAllowedBankActions());
         validActionsMapper.put("wallet",getAllowedWalletActions());
@@ -27,7 +27,7 @@ public class TransferAuthorizer {
         allowedWalletActionsList.add("wallet");
         return allowedWalletActionsList;
     }
-    public TransferAuthorizer(UserProfile sender, UserProfile receiver){
+    public TransferAuthorizer(User sender, User receiver){
         this.validActionsMapper = new HashMap<>();
         this.addActions();
         this.sender = sender;

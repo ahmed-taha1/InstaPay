@@ -1,25 +1,25 @@
 package InstaPay.SW.spring_boot_instapay_project.Users.DataAccess;
 
-import InstaPay.SW.spring_boot_instapay_project.Users.Entities.UserProfile;
+import InstaPay.SW.spring_boot_instapay_project.Users.Entities.BankUser;
+import InstaPay.SW.spring_boot_instapay_project.Users.Entities.User;
+import InstaPay.SW.spring_boot_instapay_project.Users.Entities.WalletUser;
 
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Vector;
-
-import java.util.List;
 
 public class InMemoryDataAccess implements IUserDataAccess {
-    List<UserProfile> users;
+    ArrayList<User> users;
     public InMemoryDataAccess() {
-        this.users = new Vector<>();
-        UserProfile user1 = new UserProfile("user1", "password1", "user1@example.com", "Admin", "1234567890");
-        UserProfile user2 = new UserProfile("user2", "password2", "user2@example.com", "Customer", "9876543210");
+        this.users = new ArrayList<>();
+        User user1 = new WalletUser("user1", "password1",  "1234567890", "VF cash");
+        User user2 = new BankUser("user2", "password2", "9876543210", "12354685");
         users.add(user1);
         users.add(user2);
     }
 
     @Override
-    public UserProfile getUserByMobileNumber(String phoneNumber) {
-        for(UserProfile i:users){
+    public User getUserByMobileNumber(String phoneNumber) {
+        for(User i:users){
             if(Objects.equals(i.getPhoneNumber(), phoneNumber)){
                 return i;
             }
@@ -28,16 +28,14 @@ public class InMemoryDataAccess implements IUserDataAccess {
     }
 
     @Override
-    public UserProfile getUserByUserName(String userName) {
+    public User getUserByUserName(String userName) {
 
-        for(UserProfile i:users){
-            if(i.getUserName()==userName){
+        for(User i:users){
+            if(Objects.equals(i.getUserName(), userName)){
                 return i;
             }
         }
         return null;
     }
 
-//    @Override
-//    public void createUser(UserProfile userProfile) {}
 }

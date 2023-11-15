@@ -1,10 +1,10 @@
 package InstaPay.SW.spring_boot_instapay_project.Users.DataAccess;
 
 
-import InstaPay.SW.spring_boot_instapay_project.Users.Entities.UserProfile;
+import InstaPay.SW.spring_boot_instapay_project.Users.Entities.User;
 
 public interface IUserDataAccess {
-    public UserProfile getUserByMobileNumber(String phoneNumber);
-    public UserProfile getUserByUserName(String Name);
+    public User getUserByMobileNumber(String phoneNumber);
+    public User getUserByUserName(String Name);
 //    public void createUser(UserProfile userProfile);
 }
