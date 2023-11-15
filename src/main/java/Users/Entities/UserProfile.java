@@ -7,7 +7,7 @@ public class UserProfile {
     private final String phoneNumber;
     private final String userType;
 
-    UserProfile(String userName, String password, String email, String userType,String phoneNumber){
+    public UserProfile(String userName, String password, String email, String userType, String phoneNumber){
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -28,5 +28,15 @@ public class UserProfile {
     }
     public String getUserType() {
         return userType;
+    }
+
+    public Object getUserEntity(String number) {
+        if (userType=="BankUser") {
+            return new BankUser(this, number);
+        } else if (userType=="WalletUser") {
+            return new WalletUser(this);
+        } else {
+            return ("Invalid user type");
+        }
     }
 }
