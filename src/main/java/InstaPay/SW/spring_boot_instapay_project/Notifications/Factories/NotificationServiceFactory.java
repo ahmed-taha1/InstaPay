@@ -1,4 +1,5 @@
 package InstaPay.SW.spring_boot_instapay_project.Notifications.Factories;
+
 import InstaPay.SW.spring_boot_instapay_project.Notifications.Entities.INotification;
 
 import java.util.HashMap;

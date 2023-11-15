@@ -4,5 +4,5 @@ import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNo
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
 
 public interface ITransaction {
-    public void executeTransaction(double amount)throws UnAuthorized, InvalidBalance, UserNotFound;
+    public void executeTransaction(double amount)throws UnAuthorized,InvalidBalance, UserNotFound;
 }

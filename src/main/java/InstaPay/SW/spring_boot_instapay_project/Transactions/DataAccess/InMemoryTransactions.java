@@ -1,11 +1,10 @@
 package InstaPay.SW.spring_boot_instapay_project.Transactions.DataAccess;
+import InstaPay.SW.spring_boot_instapay_project.Transactions.DataAccess.InMemoryTransactions;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.Transaction;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public class InMemoryTransactions implements TransactionsDataAccess {
     private Map<Integer, Transaction> transactionsDB ;
     private static InMemoryTransactions dbInstance = null;

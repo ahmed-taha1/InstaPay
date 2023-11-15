@@ -1,4 +1,5 @@
 package InstaPay.SW.spring_boot_instapay_project.Transactions.Entities;
+
 import java.util.ArrayList;
 
 public enum TransactionType {

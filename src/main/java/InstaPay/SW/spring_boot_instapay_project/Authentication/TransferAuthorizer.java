@@ -1,4 +1,6 @@
 package InstaPay.SW.spring_boot_instapay_project.Authentication;
+
+
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UnAuthorized;
 import InstaPay.SW.spring_boot_instapay_project.Users.Entities.UserProfile;
 
@@ -31,7 +33,7 @@ public class TransferAuthorizer {
         this.sender = sender;
         this.receiver = receiver;
     }
-    public void validateAction()throws UnAuthorized{
+    public void validateAction()throws UnAuthorized {
         if(validActionsMapper.get(this.sender.getUserType().toLowerCase()) == null){
             throw new UnAuthorized("Invalid action");
         }

@@ -1,9 +1,10 @@
 package InstaPay.SW.spring_boot_instapay_project.Transactions.Entities;
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UnAuthorized;
-import InstaPay.SW.spring_boot_instapay_project.Authentication.TransferAuthorizer;
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
+import InstaPay.SW.spring_boot_instapay_project.Authentication.TransferAuthorizer;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.IPaymentGateway;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
+
 
 public class TransferMoney implements ITransaction{
     IPaymentGateway senderGateway;

@@ -1,12 +1,13 @@
-package InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways;
+package InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGateways;
+
+import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.IPaymentGateway;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
-import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
 
 public class MockBankPaymentGateway implements IPaymentGateway {
     private final String userBankAccount;
     public MockBankPaymentGateway(String userBankAccount)throws UserNotFound{
-        if(!MockBankDB.findUser(userBankAccount)){
+        if(!MockBankDB.findUserByBankAccount(userBankAccount)){
             throw new UserNotFound("Bank account doesn't exist in mockBank");
         }
         this.userBankAccount = userBankAccount;

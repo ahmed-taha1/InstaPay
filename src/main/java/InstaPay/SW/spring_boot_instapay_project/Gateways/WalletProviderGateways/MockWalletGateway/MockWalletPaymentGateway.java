@@ -1,7 +1,8 @@
-package InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways;
-import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
+package InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways.MockWalletGateway;
+
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.IPaymentGateway;
+import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
 
 import java.util.Map;
 

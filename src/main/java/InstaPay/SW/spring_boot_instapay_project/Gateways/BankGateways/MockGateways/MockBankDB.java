@@ -1,0 +1,62 @@
+package InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGateways;
+
+
+import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
+
+import java.util.Map;
+class MockBankUser {
+    String bankAccount;
+    String phoneNumber;
+    Double balance;
+    String lastVerificationCode;
+    MockBankUser(String bankAccount, String phoneNumber, Double balance){
+        this.bankAccount = bankAccount;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
+    }
+}
+public class MockBankDB {
+    private static Map<String, MockBankUser> mockBankDB;
+    private static void seedMockDB(){
+        mockBankDB.put("20210069",new MockBankUser("20210069","01157077022",10000.0));
+        mockBankDB.put("20210033",new MockBankUser("20210033","01120293048",1000000.0));
+        mockBankDB.put("20210084",new MockBankUser("20210084","01122222356",2200.0));
+        mockBankDB.put("20210051",new MockBankUser("20210051","01023875910",10000.0));
+    }
+    static boolean isRegisteredUser(String bankAccount,String phoneNumber){
+        return findUserByBankAccount(bankAccount) && findUserByPhoneNumber(phoneNumber);
+    }
+    static void storeVerificationCode(String userBankAccount,String code){
+        mockBankDB.get(userBankAccount).lastVerificationCode = code;
+    }
+    static String getUserVerificationCode(String userBankAccount)throws UserNotFound {
+        if(!findUserByBankAccount(userBankAccount)){
+            throw new UserNotFound("No user with this bankAccount is stored in the system");
+        }
+        return mockBankDB.get(userBankAccount).lastVerificationCode;
+    }
+    static boolean findUserByBankAccount(String bankAccount){
+        return mockBankDB.get(bankAccount) != null;
+    }
+    static boolean findUserByPhoneNumber(String phoneNumber){
+        for(String bankAccount : mockBankDB.keySet()){
+            if(mockBankDB.get(bankAccount).phoneNumber.equals(phoneNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
+    static Double getUserBalance(String userBankAccount) throws UserNotFound {
+        if(!findUserByBankAccount(userBankAccount)){
+            throw new UserNotFound("Bank Account doesn't exist in MOCKDB bank");
+        }
+        return mockBankDB.get(userBankAccount).balance;
+    }
+    static void updateUserBalance(String userBankAccount,Double newBalance) throws UserNotFound {
+        if(!findUserByBankAccount(userBankAccount)){
+            throw new UserNotFound("Bank Account doesn't exist in MOCKDB bank");
+        }
+        MockBankUser user = mockBankDB.get(userBankAccount);
+        user.balance = newBalance;
+    }
+}
