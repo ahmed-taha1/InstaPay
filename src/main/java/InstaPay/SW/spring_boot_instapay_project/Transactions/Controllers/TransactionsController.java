@@ -1,20 +1,17 @@
-package InstaPay.SW.spring_boot_instapay_project.Controllers;
-
+package InstaPay.SW.spring_boot_instapay_project.Transactions.Controllers;
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UnAuthorized;
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
-import InstaPay.SW.spring_boot_instapay_project.Authentication.TransferAuthorizer;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGateways.MockBankPaymentGateway;
-import InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways.MockWalletGateway.MockWalletPaymentGateway;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.DataAccess.InMemoryTransactions;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.ITransaction;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.Transaction;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.TransactionType;
-import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.TransferMoney;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidBalance;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Factories.TransactionsFactory;
 import InstaPay.SW.spring_boot_instapay_project.Users.DataAccess.InMemoryUsers;
 import InstaPay.SW.spring_boot_instapay_project.Users.Entities.BankUser;
 import InstaPay.SW.spring_boot_instapay_project.Users.Entities.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,16 +59,15 @@ public class TransactionsController {
         double amount,
         String transactionType
     ){}
-    @PostMapping(path = "makeTransaction")
+    @PostMapping(path = "/")
     public ResponseEntity<String> transferTOWalletUsingMobileNumber(@RequestBody Map<String,Object> request) throws UserNotFound, UnAuthorized, InvalidBalance {
-        if(request.get("transactionTYpe") == null){
-            return ResponseEntity.badRequest();
+        if(request.get("transactionType") == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Transaction Type must be specified");
         }
         System.out.println(request);
         System.out.println(request.get("transactionType").toString());
         ITransaction transaction = transactionsFactory.createTransaction(request.get("transactionType").toString(),request);
-
-        return r
+        return  ResponseEntity.status(HttpStatus.OK).body("Transaction Successful");
 //        MockWalletPaymentGateway senderGateway = new MockWalletPaymentGateway(request.senderMobileNumber);
 //        MockWalletPaymentGateway receiverGateway = new MockWalletPaymentGateway(request.senderMobileNumber);
 //        InMemoryUsers inMemoryUsers = InMemoryUsers.getInstance();
@@ -84,20 +80,8 @@ public class TransactionsController {
 
     }
 
-    @GetMapping(path = "GetBalance")
-    public double getBalance(String userName) throws UserNotFound {
-        InMemoryUsers inMemoryUsers = InMemoryUsers.getInstance();
-        User user = inMemoryUsers.getUserByUserName(userName);
-        if (user.getUserType().equals("wallet")) {
-            MockWalletPaymentGateway mockWallet = new MockWalletPaymentGateway(user.getPhoneNumber());
-            return mockWallet.getBalance();
-        } else if (user.getUserType().equals("bank")) {
-            BankUser bankUser = (BankUser) user;
-            String accountNumber =  bankUser.getAccountNumber();
-            MockBankPaymentGateway mockBank = new MockBankPaymentGateway(accountNumber);
-            return mockBank.getBalance();
-        } else {
-            return 0.0;
-        }
-    }
+//    @GetMapping(path = "GetBalance")
+//    public double getBalance() throws UserNotFound {
+//
+//    }
 }

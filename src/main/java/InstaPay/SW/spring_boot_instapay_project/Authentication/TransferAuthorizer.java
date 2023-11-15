@@ -11,37 +11,37 @@ import java.util.Map;
 
 public class TransferAuthorizer {
     private final Map<String, List<String>> validActionsMapper;
-    private final User sender;
-    private final User receiver;
+    private final String senderType;
+    private final String receiverType;
     private void addActions(){
         validActionsMapper.put("bank",getAllowedBankActions());
         validActionsMapper.put("wallet",getAllowedWalletActions());
     }
-    public static List<String>getAllowedBankActions(){
+    private static List<String>getAllowedBankActions(){
         ArrayList<String> allowedBankActionsList = new ArrayList<>();
         allowedBankActionsList.add("all");
         return allowedBankActionsList;
     }
-    public static List<String>getAllowedWalletActions(){
+    private static List<String>getAllowedWalletActions(){
         ArrayList<String>allowedWalletActionsList = new ArrayList<>();
         allowedWalletActionsList.add("wallet");
         return allowedWalletActionsList;
     }
-    public TransferAuthorizer(User sender, User receiver){
+    public TransferAuthorizer(String senderType, String receiverType){
         this.validActionsMapper = new HashMap<>();
         this.addActions();
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderType = senderType;
+        this.receiverType = receiverType;
     }
     public void validateAction()throws UnAuthorized {
-        if(validActionsMapper.get(this.sender.getUserType().toLowerCase()) == null){
+        if(validActionsMapper.get(this.senderType.toLowerCase()) == null){
             throw new UnAuthorized("Invalid action");
         }
-        if(validActionsMapper.get(this.sender.getUserType().toLowerCase()).contains("all")){
+        if(validActionsMapper.get(this.senderType.toLowerCase()).contains("all")){
             return;
         }
-        if(!validActionsMapper.get(this.sender.getUserType().toLowerCase()).contains(receiver.getUserType().toLowerCase())){
-            throw new UnAuthorized(sender + " User cannot send money to " + receiver);
+        if(!validActionsMapper.get(this.senderType.toLowerCase()).contains(senderType.toLowerCase())){
+            throw new UnAuthorized(senderType + " User cannot send money to " + receiverType);
         }
     }
 }
