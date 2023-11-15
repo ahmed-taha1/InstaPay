@@ -1,14 +1,12 @@
-package Gateways.BankGateways;
+package Gateways.BankGateways.MockGateways;
 import Transactions.Exceptions.InvalidBalance;
 import Authentication.Exceptions.UserNotFound;
 import Gateways.IPaymentGateway;
 
-import java.util.Map;
-
 public class MockBankPaymentGateway implements IPaymentGateway {
     private final String userBankAccount;
     public MockBankPaymentGateway(String userBankAccount)throws UserNotFound{
-        if(!MockBankDB.findUser(userBankAccount)){
+        if(!MockBankDB.findUserByBankAccount(userBankAccount)){
             throw new UserNotFound("Bank account doesn't exist in mockBank");
         }
         this.userBankAccount = userBankAccount;

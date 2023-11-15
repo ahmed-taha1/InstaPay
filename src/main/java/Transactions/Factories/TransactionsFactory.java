@@ -2,6 +2,7 @@ package Transactions.Factories;
 
 import Transactions.Entities.ITransaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,4 +25,6 @@ public class TransactionsFactory {
     public ITransaction createTransaction(String transactionType){
         return transactionMapping.get(transactionType);
     }
+
+    // TODO get transaction type as array list from the enum (handle each user type menu)
 }

@@ -1,4 +1,4 @@
-package Gateways.WalletProviderGateways;
+package Gateways.WalletProviderGateways.MockWalletGateway;
 import Transactions.Exceptions.InvalidBalance;
 import Authentication.Exceptions.UserNotFound;
 import Gateways.IPaymentGateway;
