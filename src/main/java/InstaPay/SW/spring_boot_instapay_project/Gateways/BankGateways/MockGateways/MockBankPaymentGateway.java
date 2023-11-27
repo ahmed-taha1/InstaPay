@@ -6,18 +6,21 @@ import InstaPay.SW.spring_boot_instapay_project.Transactions.Exceptions.InvalidB
 
 public class MockBankPaymentGateway implements IPaymentGateway {
     private final String userBankAccount;
-    public MockBankPaymentGateway(String userBankAccount)throws UserNotFound{
-        if(!MockBankDB.findUserByBankAccount(userBankAccount)){
-            throw new UserNotFound("Bank account doesn't exist in mockBank");
-        }
+    public MockBankPaymentGateway(String userBankAccount){
         this.userBankAccount = userBankAccount;
     }
     @Override
     public void depositMoney(double amount) throws UserNotFound {
+        if(!MockBankDB.findUserByBankAccount(userBankAccount)){
+            throw new UserNotFound("Bank account doesn't exist in mockBank");
+        }
         Double userBalance = MockBankDB.getUserBalance(this.userBankAccount);
         MockBankDB.updateUserBalance(this.userBankAccount,userBalance + amount);
     }
     public void withdrawMoney(double amount) throws InvalidBalance, UserNotFound {
+        if(!MockBankDB.findUserByBankAccount(userBankAccount)){
+            throw new UserNotFound("Bank account doesn't exist in mockBank");
+        }
         Double userBalance = MockBankDB.getUserBalance(this.userBankAccount);
         if(userBalance < amount){
             throw new InvalidBalance("Insufficeint balance In MOCKBANK");

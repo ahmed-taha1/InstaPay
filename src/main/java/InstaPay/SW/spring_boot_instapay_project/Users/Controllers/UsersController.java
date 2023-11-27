@@ -1,4 +1,4 @@
-package InstaPay.SW.spring_boot_instapay_project.Controllers;
+package InstaPay.SW.spring_boot_instapay_project.Users.Controllers;
 
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.Transaction;
 import InstaPay.SW.spring_boot_instapay_project.Users.DataAccess.InMemoryUsers;

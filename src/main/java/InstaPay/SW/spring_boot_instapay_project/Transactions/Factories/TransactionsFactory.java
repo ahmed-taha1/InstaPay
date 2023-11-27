@@ -20,7 +20,6 @@ public class TransactionsFactory {
         transactionMapping.put("transferMoney", this::creteTransferMoneyInstance);
         transactionMapping.put("payBill", this::createPayBillsInstance);
     }
-
     public static TransactionsFactory getInstance() {
         if(transactionsFactoryInstance == null){
             transactionsFactoryInstance = new TransactionsFactory();

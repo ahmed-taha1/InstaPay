@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class InMemoryUsers implements IUserDataAccess {
     static InMemoryUsers inMemoryDataAccessInstance = null;
-
     private ArrayList<User> users;
     private InMemoryUsers() {
         this.users = new ArrayList<>();
@@ -32,10 +31,8 @@ public class InMemoryUsers implements IUserDataAccess {
         }
         return null;
     }
-
     @Override
     public User getUserByUserName(String userName) {
-
         for(User i:users){
             if(Objects.equals(i.getUserName(), userName)){
                 return i;
@@ -43,7 +40,6 @@ public class InMemoryUsers implements IUserDataAccess {
         }
         return null;
     }
-
     @Override
     public void createUser(User userProfile){
         users.add(userProfile);

@@ -7,5 +7,4 @@ public interface IUserDataAccess {
     public User getUserByMobileNumber(String phoneNumber);
     public User getUserByUserName(String Name);
     public void createUser(User userProfile);
-
 }
