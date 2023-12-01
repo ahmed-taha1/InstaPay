@@ -2,7 +2,10 @@ package InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways
 
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 class MockWalletUser{
     String phoneNumber;
     Double balance;
@@ -14,7 +17,12 @@ class MockWalletUser{
 }
 public class MockWalletDB {
     private static Map<String, MockWalletUser> mockWalletDB;
+    static {
+        seedMockDB();
+    }
     private static void seedMockDB(){
+        mockWalletDB = new HashMap<>();
+        mockWalletDB.put("1234567890",new MockWalletUser("1234567890",10000.0));
         mockWalletDB.put("20210069",new MockWalletUser("20210069",10000.0));
         mockWalletDB.put("20210033",new MockWalletUser("20210033",1500.0));
         mockWalletDB.put("20210084",new MockWalletUser("20210033",1500.0));
@@ -27,7 +35,7 @@ public class MockWalletDB {
     static boolean isRegisteredUser(String phoneNumber){
         return mockWalletDB.get(phoneNumber) != null;
     }
-    static Double getUserBalance(String phoneNumber) throws UserNotFound {
+    public static Double getUserBalance(String phoneNumber) throws UserNotFound {
         if(!findUser(phoneNumber)){
             throw new UserNotFound("Bank Account doesn't exist in MOCKDB bank");
         }
@@ -48,5 +56,9 @@ public class MockWalletDB {
         }
         MockWalletUser user = mockWalletDB.get(userPhoneNumber);
         user.balance = newBalance;
+    }
+    public static void addDummyUser(String phoneNumber){
+        double randomBalance = new Random().nextDouble(5000.0);
+        mockWalletDB.put(phoneNumber, new MockWalletUser(phoneNumber, randomBalance));
     }
 }

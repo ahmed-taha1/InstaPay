@@ -7,9 +7,11 @@ import InstaPay.SW.spring_boot_instapay_project.Authentication.TransferAuthorize
 import InstaPay.SW.spring_boot_instapay_project.Bills.Entities.BillInfo;
 import InstaPay.SW.spring_boot_instapay_project.Bills.Entities.BillsTypes;
 import InstaPay.SW.spring_boot_instapay_project.Bills.Factories.BillFactory;
+import InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGateways.MockBankDB;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGateways.MockBankPaymentGateway;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.Factory.PaymentGatewayFactory;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.IPaymentGateway;
+import InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways.MockWalletGateway.MockWalletDB;
 import InstaPay.SW.spring_boot_instapay_project.Gateways.WalletProviderGateways.MockWalletGateway.MockWalletPayementGateway;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.ITransaction;
 import InstaPay.SW.spring_boot_instapay_project.Transactions.Entities.TransferMoney;
@@ -20,7 +22,6 @@ import InstaPay.SW.spring_boot_instapay_project.Users.Entities.BankUser;
 import InstaPay.SW.spring_boot_instapay_project.Users.Entities.User;
 import InstaPay.SW.spring_boot_instapay_project.Users.Entities.WalletUser;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.*;
 
 @SpringBootApplication
@@ -41,8 +42,9 @@ public class SpringBootInstapayProjectApplication {
 		System.out.println("please choose option");
 		System.out.println("1- Signup");
 		System.out.println("2- Login");
+		System.out.print(">> ");
 		String choose = new Scanner(System.in).nextLine();
-		if(choose == "1"){
+		if(Objects.equals(choose, "1")){
 			signup();
 		}
 		else{
@@ -50,14 +52,11 @@ public class SpringBootInstapayProjectApplication {
 		}
 	}
 	public static void login() throws UserNotFound, UnAuthenticated, InvalidBalance, UnAuthorized {
-		System.out.println("Enter Your Phone Number:");
-		new Scanner(System.in).next();
+		System.out.print("Enter Your Phone Number: ");
 		String phoneNumber = new Scanner(System.in).nextLine();
-		System.out.println("Enter your userName:");
-		new Scanner(System.in).next();
+		System.out.print("Enter your userName: ");
 		String userName = new Scanner(System.in).nextLine();
-		System.out.println("Enter Password");
-		new Scanner(System.in).next();
+		System.out.print("Enter Password: ");
 		String password = new Scanner(System.in).nextLine();
 		User user = userDataAccess.getUserByUserName(userName);
 		if(user == null){
@@ -71,59 +70,64 @@ public class SpringBootInstapayProjectApplication {
 		transactionWindow();
 	}
 	public static void signup(){
+		System.out.print("Enter your userName: ");
 		String userName = new Scanner(System.in).nextLine();
-		System.out.println("Enter your userName: ");
-		new Scanner(System.in).next();
 
 		if(userDataAccess.getUserByUserName(userName) != null){
 			System.out.println("user already exist");
 			new Scanner(System.in).next();
 			return;
 		}
-		System.out.println("Enter password: ");
-		new Scanner(System.in).next();
+		System.out.print("Enter password: ");
 		String password = new Scanner(System.in).nextLine();
 
-		System.out.println("Enter you phone Number: ");
-		new Scanner(System.in).next();
+		System.out.print("Enter you phone Number: ");
 		String phoneNumber = new Scanner(System.in).nextLine();
 		System.out.println("OTP sent");
-		new Scanner(System.in).next();
 
-		System.out.println("Bank user type(1) or wallet user type(2)? : ");
-		new Scanner(System.in).next();
-
+		System.out.print("Bank user type(1) or wallet user type(2)? : ");
 		int choose = new Scanner(System.in).nextInt();
 
 		if(choose == 1){
+			System.out.print("please enter your bank account number: ");
 			String bankAccountNumber = new Scanner(System.in).nextLine();
 			userDataAccess.createUser(new BankUser(userName, password, phoneNumber, bankAccountNumber));
+			MockBankDB.addDummyUser(bankAccountNumber, phoneNumber);	// TODO separate layers
 		}
 		else if(choose == 2){
-			System.out.println("please enter your wallet provider");
+			System.out.print("please enter your wallet provider: ");
 			String walletProvider = new Scanner(System.in).nextLine();
 			userDataAccess.createUser(new WalletUser(userName, password, phoneNumber, walletProvider));
+			MockWalletDB.addDummyUser(phoneNumber);	// TODO separate layers
 		}
 	}
-	public static void transactionWindow() throws UserNotFound, UnAuthorized, InvalidBalance {
-		System.out.println("1-Transfer To BankAccount");
-		System.out.println("2-Transfer To WalletUser");
-		System.out.println("3-Transfer To InstaPayUser");
-		System.out.println("4-Pay Bill");
-		System.out.println("5-Inquire About Balance");
-		new Scanner(System.in).next();
-		int choice = new Scanner(System.in).nextInt();
-		if(choice == 1){
-			transferToBankAccount();
-		} else if (choice == 2) {
-			transferToWalletUser();
-		}else if(choice == 3){
-			transferToInstaPay();
-		}else if(choice == 4){
-			payBill();
-		}else if(choice == 5){
-			InquireAboutBalance();
+	public static void transactionWindow() throws UserNotFound, UnAuthorized, InvalidBalance, UnAuthenticated {
+		while (true) {
+			System.out.println("1-Transfer To BankAccount");
+			System.out.println("2-Transfer To WalletUser");
+			System.out.println("3-Transfer To InstaPayUser");
+			System.out.println("4-Pay Bill");
+			System.out.println("5-Inquire About Balance");
+			System.out.println("6-Log Out");
+			System.out.print(">> ");
+			int choice = new Scanner(System.in).nextInt();
+			if (choice == 1) {
+				transferToBankAccount();
+			} else if (choice == 2) {
+				transferToWalletUser();
+			} else if (choice == 3) {
+				transferToInstaPay();
+			} else if (choice == 4) {
+				payBill();
+			} else if (choice == 5) {
+				InquireAboutBalance();
+			}
+			else if(choice == 6){
+				activeUser = null;
+				break;
+			}
 		}
+		startWindow();
 	}
 	public static void transferToBankAccount() throws UserNotFound, UnAuthorized, InvalidBalance {
 		System.out.println("Please Enter Receiver Phone Number:");
@@ -202,29 +206,12 @@ public class SpringBootInstapayProjectApplication {
 		BillInfo bill = billFactory.createBillStrategy(choose);
 		bill.pay();
 	}
-	public static void InquireAboutBalance(){
-		Map<String, Object> user1 = new HashMap<>();
-		if(activeUser.getUserType() == "bank"){
-			BankUser user = (BankUser) activeUser;
-			MockBankPaymentGateway mockBankPaymentGateway = new MockBankPaymentGateway(user.getAccountNumber());
-			double amount = 0;
-			try {
-				amount = mockBankPaymentGateway.getBalance();
-			} catch (UserNotFound e) {
-				throw new RuntimeException(e);
-			}
-			System.out.println("your balance is" + amount);
-			new Scanner(System.in).next();
-		}
-		else{
-			MockWalletPayementGateway mockWalletPayementGatey = new MockWalletPayementGateway(activeUser.getPhoneNumber());
-			try {
-				double amount = mockWalletPayementGatey.getBalance();
-				System.out.println("your balance is" + amount);
-				new Scanner(System.in).next();
-			} catch (UserNotFound e) {
-				throw new RuntimeException(e);
-			}
-		}
+
+	public static void InquireAboutBalance() throws UserNotFound {
+		Map<String, Object> userData = new HashMap<>();
+		userData.put("user", activeUser);
+		IPaymentGateway mockPaymentGateway = PaymentGatewayFactory.getInstance().createGateway(activeUser.getUserType(), userData);
+		double balance = mockPaymentGateway.getBalance();
+		System.out.println("your balance is: " + balance + '\n');
 	}
 }

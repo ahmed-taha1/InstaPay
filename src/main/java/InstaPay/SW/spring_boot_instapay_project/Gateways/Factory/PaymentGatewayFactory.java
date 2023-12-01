@@ -47,6 +47,6 @@ public class PaymentGatewayFactory {
             return null;
         }
         WalletUser user = (WalletUser) attr.get("user");
-        return new MockBankPaymentGateway(user.getPhoneNumber());
+        return new MockWalletPayementGateway(user.getPhoneNumber());
     }
 }

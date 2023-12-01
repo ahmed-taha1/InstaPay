@@ -3,7 +3,10 @@ package InstaPay.SW.spring_boot_instapay_project.Gateways.BankGateways.MockGatew
 
 import InstaPay.SW.spring_boot_instapay_project.Authentication.Exceptions.UserNotFound;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 class MockBankUser {
     String bankAccount;
     String phoneNumber;
@@ -17,7 +20,12 @@ class MockBankUser {
 }
 public class MockBankDB {
     private static Map<String, MockBankUser> mockBankDB;
+    static {
+        seedMockDB();
+    }
     private static void seedMockDB(){
+        mockBankDB = new HashMap<>();
+        mockBankDB.put("12354685",new MockBankUser("12354685","9876543210",10000.0));
         mockBankDB.put("20210069",new MockBankUser("20210069","01157077022",10000.0));
         mockBankDB.put("20210033",new MockBankUser("20210033","01120293048",1000000.0));
         mockBankDB.put("20210084",new MockBankUser("20210084","01122222356",2200.0));
@@ -58,5 +66,10 @@ public class MockBankDB {
         }
         MockBankUser user = mockBankDB.get(userBankAccount);
         user.balance = newBalance;
+    }
+
+    public static void addDummyUser(String bankAccount, String phoneNumber){
+        double randomBalance = new Random().nextDouble(5000.0);
+        mockBankDB.put(bankAccount, new MockBankUser(bankAccount, phoneNumber, randomBalance));
     }
 }
