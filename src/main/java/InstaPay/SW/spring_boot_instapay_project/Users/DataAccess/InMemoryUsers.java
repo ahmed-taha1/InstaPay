@@ -12,8 +12,18 @@ public class InMemoryUsers implements IUserDataAccess {
     private ArrayList<User> users;
     private InMemoryUsers() {
         this.users = new ArrayList<>();
-        users.add(new WalletUser("user1", "password1",  "1234567890", "VF cash"));
-        users.add(new BankUser("user2", "password2", "9876543210", "12354685"));
+        users.add(new WalletUser("user1", "password",  "01234567890", "VF cash"));
+        users.add(new BankUser("user2", "password", "01111155566", "12354685"));
+        users.add(new BankUser("user3", "password", "01157077022", "20210069"));
+        users.add(new BankUser("user4", "password", "01120293048", "20210033"));
+        users.add(new BankUser("user5", "password", "01122222356", "20210084"));
+        users.add(new BankUser("user6", "password", "01023875910", "20210051"));
+        users.add(new WalletUser("user7", "password",  "01234567890", "VF cash"));
+        users.add(new WalletUser("user8", "password",  "01020210069", "VF cash"));
+        users.add(new WalletUser("user9", "password",  "01020210033", "VF cash"));
+        users.add(new WalletUser("user10", "password",  "01020210084", "VF cash"));
+        users.add(new WalletUser("user11", "password",  "01020210055", "VF cash"));
+        users.add(new WalletUser("user12", "password",  "01020210044", "VF cash"));
     }
 
     public static InMemoryUsers getInstance() {

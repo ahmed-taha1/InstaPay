@@ -22,12 +22,12 @@ public class MockWalletDB {
     }
     private static void seedMockDB(){
         mockWalletDB = new HashMap<>();
-        mockWalletDB.put("1234567890",new MockWalletUser("1234567890",10000.0));
-        mockWalletDB.put("20210069",new MockWalletUser("20210069",10000.0));
-        mockWalletDB.put("20210033",new MockWalletUser("20210033",1500.0));
-        mockWalletDB.put("20210084",new MockWalletUser("20210033",1500.0));
-        mockWalletDB.put("20210055",new MockWalletUser("20210055",2200.0));
-        mockWalletDB.put("20210044",new MockWalletUser("20210044",2200.0));
+        mockWalletDB.put("01234567890",new MockWalletUser("01234567890",10000.0));
+        mockWalletDB.put("01020210069",new MockWalletUser("01020210069",10000.0));
+        mockWalletDB.put("01020210033",new MockWalletUser("01020210033",1500.0));
+        mockWalletDB.put("01020210084",new MockWalletUser("01020210084",1500.0));
+        mockWalletDB.put("01020210055",new MockWalletUser("01020210055",2200.0));
+        mockWalletDB.put("01020210044",new MockWalletUser("01020210044",2200.0));
     }
     static boolean findUser(String phoneNumber){
         return mockWalletDB.get(phoneNumber) != null;

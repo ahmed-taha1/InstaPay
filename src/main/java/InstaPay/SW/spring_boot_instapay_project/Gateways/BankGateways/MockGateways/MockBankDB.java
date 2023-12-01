@@ -25,7 +25,7 @@ public class MockBankDB {
     }
     private static void seedMockDB(){
         mockBankDB = new HashMap<>();
-        mockBankDB.put("12354685",new MockBankUser("12354685","9876543210",10000.0));
+        mockBankDB.put("12354685",new MockBankUser("12354685","01111155566",10000.0));
         mockBankDB.put("20210069",new MockBankUser("20210069","01157077022",10000.0));
         mockBankDB.put("20210033",new MockBankUser("20210033","01120293048",1000000.0));
         mockBankDB.put("20210084",new MockBankUser("20210084","01122222356",2200.0));

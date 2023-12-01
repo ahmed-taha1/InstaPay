@@ -14,8 +14,8 @@ public class BillFactory {
     BillFactory(){
         billMapping = new HashMap<>();
         billMapping.put(BillsTypes.ELECTRICITY_BILL.getIndex(), new ElectricityBill());
-        billMapping.put(BillsTypes.GAS_BILL.getIndex(), new WaterBill());
-        billMapping.put(BillsTypes.WATER_BILL.getIndex(), new GasBill());
+        billMapping.put(BillsTypes.GAS_BILL.getIndex(), new GasBill());
+        billMapping.put(BillsTypes.WATER_BILL.getIndex(), new WaterBill());
     }
     static public BillFactory getBillFactoryInstance(){
         if(instance == null)
