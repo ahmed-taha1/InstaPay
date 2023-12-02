@@ -3,7 +3,6 @@ import Exceptions.CustomException;
 import OTPGenerator.RandomGenerator;
 import PaymentGateways.IAuthenticationGateway;
 import StatusCodes.StatusCodes;
-
 public class MockWalletAuthenticationGateway implements IAuthenticationGateway {
     private final String phoneNumber;
     public MockWalletAuthenticationGateway(String phoneNumber){
