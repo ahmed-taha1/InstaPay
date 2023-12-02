@@ -1,7 +1,6 @@
 package Gateways.BankGateways;
-
-import Authentication.Exceptions.UserNotFound;
-
+import Exceptions.CustomException;
+import StatusCodes.StatusCodes;
 import java.util.Map;
 
 public class MockBankDB {
@@ -15,15 +14,15 @@ public class MockBankDB {
     static boolean findUser(String bankAccount){
         return mockBankDB.get(bankAccount) != null;
     }
-    static Double getUserBalance(String userBankAccount) throws UserNotFound {
+    static Double getUserBalance(String userBankAccount) throws CustomException {
         if(!findUser(userBankAccount)){
-            throw new UserNotFound("Bank Account doesn't exist in MOCKDB bank");
+            throw new CustomException(StatusCodes.NOT_FOUND,"Bank Account doesn't exist in MOCKDB bank");
         }
         return mockBankDB.get(userBankAccount);
     }
-    static void updateUserBalance(String userBankAccount,Double newBalance) throws UserNotFound {
+    static void updateUserBalance(String userBankAccount,Double newBalance) throws CustomException {
         if(!findUser(userBankAccount)){
-            throw new UserNotFound("Bank Account doesn't exist in MOCKDB bank");
+            throw new CustomException(StatusCodes.NOT_FOUND,"Bank Account doesn't exist in MOCKDB bank");
         }
         mockBankDB.put(userBankAccount,newBalance);
     }

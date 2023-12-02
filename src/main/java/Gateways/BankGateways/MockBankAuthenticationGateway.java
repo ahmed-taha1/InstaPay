@@ -1,12 +1,11 @@
 package Gateways.BankGateways;
 
-import Authentication.Exceptions.InvalidCredentials;
-import Authentication.Exceptions.UnAuthenticated;
+import Exceptions.CustomException;
 import Gateways.IAuthenticationGateway;
 
 public class MockBankAuthenticationGateway implements IAuthenticationGateway {
     @Override
-    public void authenticate() throws UnAuthenticated, InvalidCredentials {
+    public void authenticate() throws CustomException {
 
     }
 }

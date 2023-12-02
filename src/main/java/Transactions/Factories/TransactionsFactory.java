@@ -1,20 +1,19 @@
 package Transactions.Factories;
 
+import Exceptions.CustomException;
+import StatusCodes.StatusCodes;
 import Transactions.Entities.ITransaction;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionsFactory {
     private static TransactionsFactory transactionsFactoryInstance;
-    private static Map<String, ITransaction> transactionMapping;
+    private final Map<String, ITransactionFactory> transactionMapping;
     private TransactionsFactory(){
         transactionMapping = new HashMap<>();
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToBankAccount());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToWallet());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new TransferToInstapay());
-//        transactionMapping.put(TransactionType.TRANSFER_TO_BANK.toString(),new PayBill());
+        transactionMapping.put("transferMoney",new TransferMoneyFactory());
+        transactionMapping.put("payBill",new PayBillFactory());
     }
     public static TransactionsFactory getInstance() {
         if(transactionsFactoryInstance == null){
@@ -22,9 +21,10 @@ public class TransactionsFactory {
         }
         return transactionsFactoryInstance;
     }
-    public ITransaction createTransaction(String transactionType){
-        return transactionMapping.get(transactionType);
+    public ITransaction createTransaction(Map<String,Object>attributes) throws CustomException {
+        if(attributes.get("transactionType") == null){
+            throw new CustomException(StatusCodes.BAD_REQUEST, "Transaction Type Not Specified");
+        }
+        return transactionMapping.get("transactionType").createTransaction(attributes);
     }
-
-    // TODO get transaction type as array list from the enum (handle each user type menu)
 }

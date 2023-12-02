@@ -1,8 +1,7 @@
 package Transactions.Entities;
-import Authentication.Exceptions.UnAuthorized;
-import Transactions.Exceptions.InvalidBalance;
-import Authentication.Exceptions.UserNotFound;
+import Exceptions.CustomException;
+
 
 public interface ITransaction {
-    public void executeTransaction(double amount)throws UnAuthorized,InvalidBalance,UserNotFound;
+    public void executeTransaction(double amount)throws CustomException;
 }

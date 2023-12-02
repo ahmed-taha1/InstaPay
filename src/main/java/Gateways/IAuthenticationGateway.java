@@ -1,8 +1,7 @@
 package Gateways;
 
-import Authentication.Exceptions.InvalidCredentials;
-import Authentication.Exceptions.UnAuthenticated;
+import Exceptions.CustomException;
 
 public interface IAuthenticationGateway {
-    public void authenticate()throws UnAuthenticated, InvalidCredentials;
+    public void authenticate()throws CustomException;
 }

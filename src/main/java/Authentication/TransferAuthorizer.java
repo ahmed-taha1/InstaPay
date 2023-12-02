@@ -1,5 +1,6 @@
 package Authentication;
-import Authentication.Exceptions.UnAuthorized;
+import Exceptions.CustomException;
+import StatusCodes.StatusCodes;
 import Users.Entities.UserProfile;
 
 import java.util.ArrayList;
@@ -31,15 +32,15 @@ public class TransferAuthorizer {
         this.sender = sender;
         this.receiver = receiver;
     }
-    public void validateAction()throws UnAuthorized{
+    public void validateAction()throws CustomException {
         if(validActionsMapper.get(this.sender.getUserType().toLowerCase()) == null){
-            throw new UnAuthorized("Invalid action");
+            throw new CustomException(StatusCodes.UNAUTHORIZED,"UnAuthorized action");
         }
         if(validActionsMapper.get(this.sender.getUserType().toLowerCase()).contains("all")){
             return;
         }
         if(!validActionsMapper.get(this.sender.getUserType().toLowerCase()).contains(receiver.getUserType().toLowerCase())){
-            throw new UnAuthorized(sender + " User cannot send money to " + receiver);
+            throw new CustomException(StatusCodes.FORBIDDEN,sender + " User cannot send money to " + receiver);
         }
     }
 }

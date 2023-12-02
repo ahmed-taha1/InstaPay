@@ -1,8 +1,6 @@
 package Transactions.Entities;
-import Authentication.Exceptions.UnAuthorized;
 import Authentication.TransferAuthorizer;
-import Transactions.Exceptions.InvalidBalance;
-import Authentication.Exceptions.UserNotFound;
+import Exceptions.CustomException;
 import Gateways.IPaymentGateway;
 
 public class TransferMoney implements ITransaction{
@@ -15,7 +13,7 @@ public class TransferMoney implements ITransaction{
         this.authorizer = authorizer;
     }
     @Override
-    public void executeTransaction(double amount) throws UnAuthorized, InvalidBalance, UserNotFound {
+    public void executeTransaction(double amount) throws CustomException {
         authorizer.validateAction();
         this.senderGateway.withdrawMoney(amount);
         this.receiverGateway.depositMoney(amount);
