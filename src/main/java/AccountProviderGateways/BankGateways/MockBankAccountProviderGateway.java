@@ -1,10 +1,10 @@
-package PaymentGateways.BankGateways;
+package AccountProviderGateways.BankGateways;
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;
-import PaymentGateways.IPaymentGateway;
-public class MockBankPaymentGateway implements IPaymentGateway {
+import AccountProviderGateways.IAccountProviderGateway;
+public class MockBankAccountProviderGateway implements IAccountProviderGateway {
     private final String userBankAccount;
-    public MockBankPaymentGateway(String userBankAccount){
+    public MockBankAccountProviderGateway(String userBankAccount){
         this.userBankAccount = userBankAccount;
     }
     @Override

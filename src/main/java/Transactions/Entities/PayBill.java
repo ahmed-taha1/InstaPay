@@ -1,11 +1,11 @@
 package Transactions.Entities;
-import BillPaymentGateways.Entities.IBillsPaymentGateway;
+import BillPaymentGateways.Entities.IBillPaymentGateway;
 import Exceptions.CustomException;
-import PaymentGateways.IPaymentGateway;
+import AccountProviderGateways.IAccountProviderGateway;
 public class PayBill implements ITransaction {
-    IPaymentGateway paymentGateway;
-    IBillsPaymentGateway billsPaymentGateway;
-    public PayBill(IPaymentGateway paymentGateway,IBillsPaymentGateway billsPaymentGateway){
+    IAccountProviderGateway paymentGateway;
+    IBillPaymentGateway billsPaymentGateway;
+    public PayBill(IAccountProviderGateway paymentGateway, IBillPaymentGateway billsPaymentGateway){
         this.paymentGateway = paymentGateway;
         this.billsPaymentGateway = billsPaymentGateway;
     }

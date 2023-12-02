@@ -1,16 +1,15 @@
-package PaymentGateways.Factories;
+package AccountProviderGateways.Factories;
 import Exceptions.CustomException;
-import PaymentGateways.IPaymentGateway;
-import PaymentGateways.WalletProviderGateways.MockWalletPaymentGateway;
+import AccountProviderGateways.WalletProviderGateways.MockWalletAccountProviderGateway;
 import StatusCodes.StatusCodes;
 import java.util.Map;
-public class MockWalletFactory implements IPaymentGatewayFactory{
+public class MockWallet implements IAccountProviderGateway {
     @Override
-    public IPaymentGateway createPaymentGateway(Map<String, Object> attributes) throws CustomException {
+    public AccountProviderGateways.IAccountProviderGateway createPaymentGateway(Map<String, Object> attributes) throws CustomException {
         if(attributes.get("phoneNumber") == null || !(attributes.get("phoneNumber") instanceof String)){
             throw new CustomException(StatusCodes.BAD_REQUEST,"User Phone number must be provided");
         }
         String phoneNumber = (String)attributes.get("phoneNumber");
-        return new MockWalletPaymentGateway(phoneNumber);
+        return new MockWalletAccountProviderGateway(phoneNumber);
     }
 }

@@ -1,9 +1,9 @@
 package BillPaymentGateways.Entities;
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;
-public class MockBillsPaymentGateway implements IBillsPaymentGateway {
+public class MockBillPaymentGateway implements IBillPaymentGateway {
     private final String userPhoneNumber;
-    public MockBillsPaymentGateway(String userPhoneNumber){
+    public MockBillPaymentGateway(String userPhoneNumber){
         this.userPhoneNumber = userPhoneNumber;
     }
     @Override

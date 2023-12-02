@@ -1,10 +1,10 @@
-package PaymentGateways.WalletProviderGateways;
+package AccountProviderGateways.WalletProviderGateways;
 import Exceptions.CustomException;
-import PaymentGateways.IPaymentGateway;
+import AccountProviderGateways.IAccountProviderGateway;
 import StatusCodes.StatusCodes;
-public class MockWalletPaymentGateway implements IPaymentGateway {
+public class MockWalletAccountProviderGateway implements IAccountProviderGateway {
     private final String userPhoneNumber;
-    public MockWalletPaymentGateway(String userPhoneNumber){
+    public MockWalletAccountProviderGateway(String userPhoneNumber){
         this.userPhoneNumber = userPhoneNumber;
     }
     @Override

@@ -1,5 +1,5 @@
 package BillPaymentGateways.Entities;
 import Exceptions.CustomException;
-public interface IBillsPaymentGateway {
+public interface IBillPaymentGateway {
     public void payBill(double amount) throws CustomException;
 }

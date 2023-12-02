@@ -1,25 +1,23 @@
-package PaymentGateways.BankGateways;
+package AccountProviderGateways.WalletProviderGateways;
 import Exceptions.CustomException;
-import PaymentGateways.IAuthenticationGateway;
 import OTPGenerator.RandomGenerator;
+import AccountProviderGateways.IAuthenticationGateway;
 import StatusCodes.StatusCodes;
-public class MockBankAuthenticationGateway implements IAuthenticationGateway {
-    private final String bankAccount;
+public class MockWalletAuthenticationGateway implements IAuthenticationGateway {
     private final String phoneNumber;
-    public MockBankAuthenticationGateway(String bankAccount, String phoneNumber){
-        this.bankAccount = bankAccount;
+    public MockWalletAuthenticationGateway(String phoneNumber){
         this.phoneNumber = phoneNumber;
     }
     @Override
     public void authenticate() throws CustomException {
-        if(!MockBankDB.isRegisteredUser(bankAccount,phoneNumber)){
-            throw new CustomException(StatusCodes.NOT_FOUND,"Invalid Credentials");
+        if(!MockWalletDB.isRegisteredUser(phoneNumber)){
+            throw new CustomException(StatusCodes.BAD_REQUEST,"Invalid Credentials");
         }
         sendVerificationCode();
     }
     @Override
     public void verifyCode(String code) throws CustomException{
-        String storedCode = MockBankDB.getUserVerificationCode(bankAccount);
+        String storedCode =  MockWalletDB.getUserVerificationCode(phoneNumber);
         if(!storedCode.equals(code)){
             throw new CustomException(StatusCodes.UNAUTHENTICATED,"OTP doesn't match last sent code");
         }
@@ -27,6 +25,6 @@ public class MockBankAuthenticationGateway implements IAuthenticationGateway {
     private void sendVerificationCode(){
         String verificationCOde = RandomGenerator.generateOTPCode();
         System.out.println(verificationCOde);
-        MockBankDB.storeVerificationCode(this.bankAccount, verificationCOde);
+        MockWalletDB.storeVerificationCode(this.phoneNumber, verificationCOde);
     }
 }
