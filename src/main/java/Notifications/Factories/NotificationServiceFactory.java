@@ -2,10 +2,8 @@ package Notifications.Factories;
 import Exceptions.CustomException;
 import Notifications.Entities.INotification;
 import StatusCodes.StatusCodes;
-
 import java.util.HashMap;
 import java.util.Map;
-
 public class NotificationServiceFactory {
     private static NotificationServiceFactory factoryInstance = null;
     private final Map<String, INotificationServiceFactory> notificationServicesMapping;

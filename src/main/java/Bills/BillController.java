@@ -1,6 +1,4 @@
 package Bills;
-
-
 import Bills.Entities.BillInfo;
 import Bills.Factories.BillFactory;
 

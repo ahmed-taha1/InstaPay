@@ -1,5 +1,4 @@
 package StatusCodes;
-
 public class StatusCodes {
     public static int SUCCESS = 200;
     public static int CREATED_SUCCESSFULLY = 201;
@@ -9,5 +8,4 @@ public class StatusCodes {
     public static int UNAUTHENTICATED = 401;
     public static int FORBIDDEN = 403;
     public static int SERVER_ERROR = 500;
-
 }

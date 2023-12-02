@@ -1,37 +1,32 @@
 package Gateways.WalletProviderGateways;
 import Exceptions.CustomException;
-import StatusCodes.StatusCodes;
 import Gateways.IPaymentGateway;
-
-import java.util.Map;
-
+import StatusCodes.StatusCodes;
 public class MockWalletPaymentGateway implements IPaymentGateway {
     private final String userPhoneNumber;
-    private static Map<String,Double> mockWalletProviderGateway;
-    private static void seedMockDB(){
-        mockWalletProviderGateway.put("20210069",10000.0);
-        mockWalletProviderGateway.put("20210033",1500.0);
-        mockWalletProviderGateway.put("20210084",2200.0);
-        mockWalletProviderGateway.put("20210000",5000.0);
-    }
-    public MockWalletPaymentGateway(String userPhoneNumber)throws CustomException {
-        if(mockWalletProviderGateway.get(userPhoneNumber) == null){
-            throw new CustomException(StatusCodes.NOT_FOUND,"Wallet Provider account doesn't exist in mockBank");
-        }
+    public MockWalletPaymentGateway(String userPhoneNumber){
         this.userPhoneNumber = userPhoneNumber;
     }
     @Override
     public void depositMoney(double amount) throws CustomException {
-        mockWalletProviderGateway.put(this.userPhoneNumber, mockWalletProviderGateway.get(this.userPhoneNumber) + amount);
-    }
-    public void withdrawMoney(double amount) throws CustomException {
-        if(mockWalletProviderGateway.get(userPhoneNumber) < amount){
-            throw new CustomException(StatusCodes.FORBIDDEN,"User balance is not suffiecient");
+        if(!MockWalletDB.findUser(userPhoneNumber)){
+            throw new CustomException(StatusCodes.NOT_FOUND,"Wallet account doesn't exist in MockWallet");
         }
-        mockWalletProviderGateway.put(this.userPhoneNumber, mockWalletProviderGateway.get(this.userPhoneNumber) - amount);
+        Double userBalance = MockWalletDB.getUserBalance(this.userPhoneNumber);
+        MockWalletDB.updateUserBalance(this.userPhoneNumber,userBalance + amount);
+    }
+    public void withdrawMoney(double amount) throws CustomException{
+        if(!MockWalletDB.findUser(userPhoneNumber)){
+            throw new CustomException(StatusCodes.NOT_FOUND,"Wallet account doesn't exist in MockWallet");
+        }
+        Double userBalance = MockWalletDB.getUserBalance(this.userPhoneNumber);
+        if(userBalance < amount){
+            throw new CustomException(StatusCodes.FORBIDDEN,"Insufficeint balance In MockWallet");
+        }
+        MockWalletDB.updateUserBalance(this.userPhoneNumber,userBalance - amount);
     }
     @Override
     public double getBalance() throws CustomException {
-        return mockWalletProviderGateway.get(userPhoneNumber);
+        return MockWalletDB.getUserBalance(this.userPhoneNumber);
     }
 }
