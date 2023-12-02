@@ -9,10 +9,6 @@ public class NotificationServiceFactory {
     private Map<String, INotification> notificationServicesMapping;
     private NotificationServiceFactory() {
         this.notificationServicesMapping = new HashMap<>();
-        /// todo mapping , might need decorator to return a wrapped factory that recieve params for creating each class
-//        this.notificationServiceMapper.put("twilio",new TwilioSMSNotification());
-//        this.notificationServiceMapper.put("sms",new TwilioSMSNotification());
-//        this.notificationServiceMapper.put("email",new EmailNotification());
     }
     public static NotificationServiceFactory getInstance() {
         if (factoryInstance == null) {
@@ -21,10 +17,6 @@ public class NotificationServiceFactory {
         return factoryInstance;
     }
     public INotification createNotificationService(String serviceType) {
-        // todo handle creating diffrent subTypes
         return this.notificationServicesMapping.get(serviceType);
-    }
-    public String[] getAvailableBills(){
-        return notificationServicesMapping.keySet().toArray(new String[0]);
     }
 }
