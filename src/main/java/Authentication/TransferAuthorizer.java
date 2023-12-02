@@ -2,7 +2,6 @@ package Authentication;
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;
 import Users.Entities.UserProfile;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
