@@ -1,5 +1,5 @@
 package Transactions.Factories;
-import BillsGateways.IBillsPaymentGateway;
+import BillPaymentGateways.Entities.IBillsPaymentGateway;
 import Exceptions.CustomException;
 import PaymentGateways.IPaymentGateway;
 import StatusCodes.StatusCodes;

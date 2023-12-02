@@ -1,5 +1,5 @@
 package Transactions.Entities;
-import BillsGateways.IBillsPaymentGateway;
+import BillPaymentGateways.Entities.IBillsPaymentGateway;
 import Exceptions.CustomException;
 import PaymentGateways.IPaymentGateway;
 public class PayBill implements ITransaction {
