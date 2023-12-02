@@ -1,7 +1,5 @@
 package Bills.Entities;
-
 import java.util.ArrayList;
-
 public enum BillsTypes {
     ELECTRICITY_BILL(1, "electricity bill"),
     GAS_BILL(2, "gas bill"),
@@ -15,7 +13,6 @@ public enum BillsTypes {
     public int getIndex() {
         return index;
     }
-
     public static ArrayList<String> getBillsTypes(){
         ArrayList<String> BillsTypes = new ArrayList<>();
         for(BillsTypes billType : BillsTypes.class.getEnumConstants()){

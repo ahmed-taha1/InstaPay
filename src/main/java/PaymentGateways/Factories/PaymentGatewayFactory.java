@@ -1,6 +1,6 @@
-package Gateways.Factories;
+package PaymentGateways.Factories;
 import Exceptions.CustomException;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 import StatusCodes.StatusCodes;
 import java.util.HashMap;
 import java.util.Map;

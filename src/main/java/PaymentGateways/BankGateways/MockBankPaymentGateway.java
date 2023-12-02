@@ -1,7 +1,7 @@
-package Gateways.BankGateways;
+package PaymentGateways.BankGateways;
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 public class MockBankPaymentGateway implements IPaymentGateway {
     private final String userBankAccount;
     public MockBankPaymentGateway(String userBankAccount){

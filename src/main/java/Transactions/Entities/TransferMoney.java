@@ -1,7 +1,7 @@
 package Transactions.Entities;
 import Authentication.TransferAuthorizer;
 import Exceptions.CustomException;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 
 public class TransferMoney implements ITransaction{
     IPaymentGateway senderGateway;

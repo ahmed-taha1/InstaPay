@@ -1,7 +1,7 @@
-package Gateways.Factories;
+package PaymentGateways.Factories;
 import Exceptions.CustomException;
-import Gateways.IPaymentGateway;
-import Gateways.WalletProviderGateways.MockWalletPaymentGateway;
+import PaymentGateways.IPaymentGateway;
+import PaymentGateways.WalletProviderGateways.MockWalletPaymentGateway;
 import StatusCodes.StatusCodes;
 import java.util.Map;
 public class MockWalletFactory implements IPaymentGatewayFactory{

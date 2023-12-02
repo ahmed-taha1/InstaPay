@@ -1,4 +1,4 @@
-package Gateways.WalletProviderGateways;
+package PaymentGateways.WalletProviderGateways;
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package Gateways.BankGateways;
+package PaymentGateways.BankGateways;
 import Exceptions.CustomException;
-import Gateways.IAuthenticationGateway;
+import PaymentGateways.IAuthenticationGateway;
 import OTPGenerator.RandomGenerator;
 import StatusCodes.StatusCodes;
 public class MockBankAuthenticationGateway implements IAuthenticationGateway {

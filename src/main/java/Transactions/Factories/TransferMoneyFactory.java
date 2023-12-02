@@ -2,7 +2,7 @@ package Transactions.Factories;
 
 import Authentication.TransferAuthorizer;
 import Exceptions.CustomException;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 import StatusCodes.StatusCodes;
 import Transactions.Entities.ITransaction;
 import Transactions.Entities.TransferMoney;

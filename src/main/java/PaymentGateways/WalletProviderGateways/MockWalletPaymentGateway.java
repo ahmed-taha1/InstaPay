@@ -1,6 +1,6 @@
-package Gateways.WalletProviderGateways;
+package PaymentGateways.WalletProviderGateways;
 import Exceptions.CustomException;
-import Gateways.IPaymentGateway;
+import PaymentGateways.IPaymentGateway;
 import StatusCodes.StatusCodes;
 public class MockWalletPaymentGateway implements IPaymentGateway {
     private final String userPhoneNumber;

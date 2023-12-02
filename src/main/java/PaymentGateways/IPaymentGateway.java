@@ -1,4 +1,4 @@
-package Gateways;
+package PaymentGateways;
 
 import Exceptions.CustomException;
 

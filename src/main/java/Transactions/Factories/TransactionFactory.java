@@ -20,7 +20,7 @@ public class TransactionFactory {
     }
     public ITransaction createTransaction(Map<String,Object>attributes) throws CustomException {
         if(attributes.get("transactionType") == null || !(attributes.get("transactionType") instanceof String)){
-            throw new CustomException(StatusCodes.BAD_REQUEST, "Transaction Type Not Specified");
+            throw new CustomException(StatusCodes.BAD_REQUEST,"Transaction Type Not Specified");
         }
         String transactionType = (String) attributes.get("transactionType");
         return transactionMapping.get(transactionType).createTransaction(attributes);

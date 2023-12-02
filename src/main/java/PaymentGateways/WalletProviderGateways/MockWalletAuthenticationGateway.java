@@ -1,4 +1,4 @@
-package Gateways.WalletProviderGateways;
+package PaymentGateways.WalletProviderGateways;
 
 public class MockWalletAuthenticationGateway {
 }
