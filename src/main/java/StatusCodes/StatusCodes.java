@@ -1,4 +1,5 @@
 package StatusCodes;
+
 public class StatusCodes {
     public static int SUCCESS = 200;
     public static int CREATED_SUCCESSFULLY = 201;

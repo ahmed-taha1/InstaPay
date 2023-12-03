@@ -9,19 +9,23 @@ public enum TransactionType {
     PAY_BILL(4, "pay bill");
     private final int index;
     private final String transactionTypeName;
+
     TransactionType(int index, String transactionTypeName) {
         this.index = index;
         this.transactionTypeName = transactionTypeName;
     }
+
     public int getIndex() {
         return index;
     }
-    public String getTransactionTypeName(){
+
+    public String getTransactionTypeName() {
         return transactionTypeName;
     }
-    public ArrayList<String> getTransactionTypes(){
+
+    public ArrayList<String> getTransactionTypes() {
         ArrayList<String> transactionTypes = new ArrayList<>();
-        for(TransactionType transactionType : TransactionType.class.getEnumConstants()){
+        for (TransactionType transactionType : TransactionType.class.getEnumConstants()) {
             transactionTypes.add(transactionType.transactionTypeName);
         }
         return transactionTypes;

@@ -1,5 +1,7 @@
 package OTPGenerator;
+
 import java.util.Random;
+
 public class RandomGenerator {
     public static String generateOTPCode() {
         Random random = new Random();

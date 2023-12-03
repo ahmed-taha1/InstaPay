@@ -10,21 +10,25 @@ import java.util.Map;
 public class BillFactory {
     private static BillFactory instance = null;
     private final Map<Integer, BillInfo> billMapping;
-    BillFactory(){
+
+    BillFactory() {
         billMapping = new HashMap<>();
         billMapping.put(BillsTypes.ELECTRICITY_BILL.getIndex(), new ElectricityBill());
         billMapping.put(BillsTypes.GAS_BILL.getIndex(), new WaterBill());
         billMapping.put(BillsTypes.WATER_BILL.getIndex(), new GasBill());
     }
-    static public BillFactory getBillFactoryInstance(){
-        if(instance == null)
-                instance = new BillFactory();
+
+    static public BillFactory getBillFactoryInstance() {
+        if (instance == null)
+            instance = new BillFactory();
         return instance;
     }
-    public BillInfo createBillStrategy(int billNumber){
+
+    public BillInfo createBillStrategy(int billNumber) {
         return billMapping.get(billNumber);
     }
-    public ArrayList<String> getAvailableBills(){
+
+    public ArrayList<String> getAvailableBills() {
         return BillsTypes.getBillsTypes();
     }
 }

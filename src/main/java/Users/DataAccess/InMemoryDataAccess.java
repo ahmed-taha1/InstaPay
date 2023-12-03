@@ -2,7 +2,7 @@ package Users.DataAccess;
 
 import Users.Entities.UserProfile;
 
-public class InMemoryDataAccess implements IUserDataAccess{
+public class InMemoryDataAccess implements IUserDataAccess {
     @Override
     public UserProfile getUserByMobileNumber(String phoneNumber) {
         return null;

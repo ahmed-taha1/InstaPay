@@ -1,17 +1,20 @@
 package Transactions.Entities;
+
 import Authentication.TransferAuthorizer;
 import Exceptions.CustomException;
 import AccountProviderGateways.IAccountProviderGateway;
 
-public class TransferMoney implements ITransaction{
+public class TransferMoney implements ITransaction {
     IAccountProviderGateway senderGateway;
     IAccountProviderGateway receiverGateway;
     TransferAuthorizer authorizer;
+
     public TransferMoney(IAccountProviderGateway senderGateway, IAccountProviderGateway receiverGateway, TransferAuthorizer authorizer) {
         this.senderGateway = senderGateway;
         this.receiverGateway = receiverGateway;
         this.authorizer = authorizer;
     }
+
     @Override
     public void executeTransaction(double amount) throws CustomException {
         authorizer.validateAction();

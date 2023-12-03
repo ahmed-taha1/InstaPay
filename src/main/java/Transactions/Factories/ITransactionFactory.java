@@ -6,5 +6,5 @@ import Transactions.Entities.ITransaction;
 import java.util.Map;
 
 interface ITransactionFactory {
-    public ITransaction createTransaction(Map<String, Object>attributes) throws CustomException;
+    public ITransaction createTransaction(Map<String, Object> attributes) throws CustomException;
 }
