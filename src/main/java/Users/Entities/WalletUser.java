@@ -1,13 +1,12 @@
 package Users.Entities;
 
-public class WalletUser {
-    private final UserProfile userProfile;
-
-    WalletUser(UserProfile userProfile) {
-        this.userProfile = userProfile;
+public class WalletUser implements IUser{
+    private InstaPayAccount instaPayAccount;
+    public WalletUser(InstaPayAccount instaPayAccount) {
+        this.instaPayAccount = instaPayAccount;
     }
-
-    public String getPhoneNumber() {
-        return this.userProfile.getPhoneNumber();
+    @Override
+    public InstaPayAccount getInstaPayAccount() {
+        return instaPayAccount;
     }
 }

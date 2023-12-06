@@ -1,8 +1,8 @@
 package Notifications.Factories;
 
 import Exceptions.CustomException;
-import Notifications.Entities.EmailNotification;
-import Notifications.Entities.INotification;
+import Notifications.Services.EmailNotification;
+import Notifications.Services.INotification;
 import StatusCodes.StatusCodes;
 
 import java.util.Map;

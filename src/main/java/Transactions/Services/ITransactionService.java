@@ -1,8 +1,8 @@
-package Transactions.Entities;
+package Transactions.Services;
 
 import Exceptions.CustomException;
 
 
-public interface ITransaction {
+public interface ITransactionService {
     public void executeTransaction(double amount) throws CustomException;
 }

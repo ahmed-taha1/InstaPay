@@ -1,4 +1,4 @@
-package BillPaymentGateways.Entities;
+package BillPaymentGateways.Gateways;
 
 import Exceptions.CustomException;
 import StatusCodes.StatusCodes;

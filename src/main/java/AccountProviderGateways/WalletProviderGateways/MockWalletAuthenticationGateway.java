@@ -4,33 +4,28 @@ import Exceptions.CustomException;
 import OTPGenerator.RandomGenerator;
 import AccountProviderGateways.IAuthenticationGateway;
 import StatusCodes.StatusCodes;
+import Users.Entities.IUser;
 
 public class MockWalletAuthenticationGateway implements IAuthenticationGateway {
-    private final String phoneNumber;
-
-    public MockWalletAuthenticationGateway(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     @Override
-    public void authenticate() throws CustomException {
-        if (!MockWalletDB.isRegisteredUser(phoneNumber)) {
+    public void authenticate(IUser user) throws CustomException {
+        if (!MockWalletDB.isRegisteredUser(user.getInstaPayAccount().getPhoneNumber())) {
             throw new CustomException(StatusCodes.BAD_REQUEST, "Invalid Credentials");
         }
-        sendVerificationCode();
+        sendVerificationCode(user);
     }
-
     @Override
-    public void verifyCode(String code) throws CustomException {
-        String storedCode = MockWalletDB.getUserVerificationCode(phoneNumber);
+    public void verifyCode(IUser user,String code) throws CustomException {
+        String storedCode = MockWalletDB.getUserVerificationCode(user.getInstaPayAccount().getPhoneNumber());
         if (!storedCode.equals(code)) {
             throw new CustomException(StatusCodes.UNAUTHENTICATED, "OTP doesn't match last sent code");
         }
     }
 
-    private void sendVerificationCode() {
+    private void sendVerificationCode(IUser user) {
         String verificationCOde = RandomGenerator.generateOTPCode();
         System.out.println(verificationCOde);
-        MockWalletDB.storeVerificationCode(this.phoneNumber, verificationCOde);
+        MockWalletDB.storeVerificationCode(user.getInstaPayAccount().getPhoneNumber(), verificationCOde);
     }
 }

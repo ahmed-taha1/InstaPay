@@ -1,7 +1,7 @@
 package Notifications.Factories;
 
 import Exceptions.CustomException;
-import Notifications.Entities.INotification;
+import Notifications.Services.INotification;
 import StatusCodes.StatusCodes;
 
 import java.util.HashMap;

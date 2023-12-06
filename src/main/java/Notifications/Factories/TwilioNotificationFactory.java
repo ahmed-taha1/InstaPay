@@ -1,8 +1,8 @@
 package Notifications.Factories;
 
 import Exceptions.CustomException;
-import Notifications.Entities.INotification;
-import Notifications.Entities.TwilioSMSNotification;
+import Notifications.Services.INotification;
+import Notifications.Services.TwilioSMSNotification;
 import StatusCodes.StatusCodes;
 
 import java.util.Map;

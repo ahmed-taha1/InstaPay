@@ -1,4 +1,4 @@
-package Notifications.Entities;
+package Notifications.Services;
 
 public class EmailNotification implements INotification {
     private final String emailAddress;

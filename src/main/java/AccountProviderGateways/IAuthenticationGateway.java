@@ -1,9 +1,10 @@
 package AccountProviderGateways;
 
 import Exceptions.CustomException;
+import Users.Entities.IUser;
 
 public interface IAuthenticationGateway {
-    public void authenticate() throws CustomException;
+    public void authenticate(IUser user) throws CustomException;
 
-    public void verifyCode(String code) throws CustomException;
+    public void verifyCode(IUser user,String code) throws CustomException;
 }

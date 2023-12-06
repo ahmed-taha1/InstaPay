@@ -1,19 +1,20 @@
 package Users.Entities;
 
-public class BankUser {
-    private final UserProfile userProfile;
-    private final String accountNumber;
+public class BankUser implements IUser{
+    private InstaPayAccount instaPayAccount;
+    private final String bankAccount;
 
-    BankUser(UserProfile userProfile, String accountNumber) {
-        this.userProfile = userProfile;
-        this.accountNumber = accountNumber;
+    public BankUser(InstaPayAccount instaPayAccount, String bankAccount) {
+        this.instaPayAccount = instaPayAccount;
+        this.bankAccount = bankAccount;
     }
 
-    public UserProfile getUserProfile() {
-        return userProfile;
+    public String getBankAccount() {
+        return bankAccount;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    @Override
+    public InstaPayAccount getInstaPayAccount() {
+        return instaPayAccount;
     }
 }

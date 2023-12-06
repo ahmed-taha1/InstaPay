@@ -1,15 +1,22 @@
 package Users.DataAccess;
 
-import Users.Entities.UserProfile;
+import Users.Entities.BankUser;
+import Users.Entities.IUser;
+import Users.Entities.InstaPayAccount;
 
 public class InMemoryDataAccess implements IUserDataAccess {
     @Override
-    public UserProfile getUserByMobileNumber(String phoneNumber) {
+    public IUser getUserByMobileNumber(String phoneNumber) {
         return null;
     }
 
     @Override
-    public UserProfile getUserByUserName(String Name) {
+    public IUser getUserByUserName(String Name) {
+        return null;
+    }
+
+    @Override
+    public BankUser getUserByBankAccount(String bankAccount) {
         return null;
     }
 }
