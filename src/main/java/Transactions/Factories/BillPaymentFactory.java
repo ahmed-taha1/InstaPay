@@ -16,7 +16,7 @@ public class BillPaymentFactory {
         }
         return transactionsFactoryInstance;
     }
-    private ITransactionService createPayBillsInstance(
+    public ITransactionService createPayBillsInstance(
             String senderUserName,
             String billType,
             IAccountProviderGatewayFactory accountProviderGatewayFactory,

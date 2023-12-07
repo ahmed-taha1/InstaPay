@@ -45,7 +45,7 @@ public class TransferToInstaPayAccountService implements ITransactionService {
         if(sendingUser == null){
             throw new CustomException(StatusCodes.NOT_FOUND,"No Instapay Account with this userName was found to send from");
         }
-        IUser receivingUser = userDataAccess.getUserByBankAccount(receiverUserName);
+        IUser receivingUser = userDataAccess.getUserByUserName(receiverUserName);
         if(receivingUser == null){
             throw new CustomException(StatusCodes.NOT_FOUND,"No Instapay Account with this userName was found to send to");
         }
@@ -66,7 +66,7 @@ public class TransferToInstaPayAccountService implements ITransactionService {
                 amount,
                 sendingUser.getInstaPayAccount().getUserName(),
                 receiverUserName,
-                TransactionType.TRANSFER_TO_INSTAPAY,
+                TransactionType.transferToInstaPayAccount,
                 new Date()
         );
         transactionsDataAccess.createTransaction(createdTransaction);

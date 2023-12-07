@@ -46,11 +46,11 @@ public class TransferToBankAccountService implements ITransactionService {
             throw new CustomException(StatusCodes.BAD_REQUEST,"Must specify Sender and receiver and receiverBankProvider");
         }
         IUser sendingUser = userDataAccess.getUserByUserName(senderUserName);
-        IUser receivingUser = new BankUser(new InstaPayAccount(AccountType.BANK_USER, receiverProvider), receiverBankAccount);
+        IUser receivingUser = new BankUser(new InstaPayAccount(AccountType.bankAccount, receiverProvider), receiverBankAccount);
         if(sendingUser == null){
             throw new CustomException(StatusCodes.NOT_FOUND,"No Instapay Account with this userName was found to send from");
         }
-        authorizer.validateAction(sendingUser.getInstaPayAccount().getAccountType().toString(), AccountType.BANK_USER.toString());
+        authorizer.validateAction(sendingUser.getInstaPayAccount().getAccountType().toString(), AccountType.bankAccount.toString());
 
         IAccountProviderGateway senderGateway = accountProviderGatewayFactory.createAccountProviderGateway(sendingUser.getInstaPayAccount().getAccountProvider());
         IAccountProviderGateway receiverGateway = accountProviderGatewayFactory.createAccountProviderGateway(receivingUser.getInstaPayAccount().getAccountProvider());
@@ -67,7 +67,7 @@ public class TransferToBankAccountService implements ITransactionService {
                 amount,
                 sendingUser.getInstaPayAccount().getUserName(),
                 receiverBankAccount,
-                TransactionType.TRANSFER_TO_BANK,
+                TransactionType.transferToBankAccount,
                 new Date()
         );
         transactionsDataAccess.createTransaction(createdTransaction);

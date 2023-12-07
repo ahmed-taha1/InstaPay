@@ -12,7 +12,7 @@ public class MockBankAuthenticationGateway implements IAuthenticationGateway {
 
     @Override
     public void authenticate(IUser user) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;
@@ -24,7 +24,7 @@ public class MockBankAuthenticationGateway implements IAuthenticationGateway {
 
     @Override
     public void verifyCode(IUser user,String code) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;
@@ -35,7 +35,7 @@ public class MockBankAuthenticationGateway implements IAuthenticationGateway {
     }
 
     private void sendVerificationCode(IUser user) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;

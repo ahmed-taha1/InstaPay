@@ -56,7 +56,7 @@ public class PayBillService implements ITransactionService {
                 amount,
                 user.getInstaPayAccount().getUserName(),
                 billType,
-                TransactionType.PAY_BILL,
+                TransactionType.payBill,
                 new Date()
         );
         transactionsDataAccess.createTransaction(createdTransaction);

@@ -20,15 +20,16 @@ public class TransferFactory {
         }
         return transactionsFactoryInstance;
     }
-    private ITransactionService createTransferInstance(
-            TransactionType transactionType,
+    public ITransactionService createTransferInstance(
+            String transactionType,
             Map<String,String> data,
             TransferAuthorizerService transferAuthorizerService,
             IAccountProviderGatewayFactory accountProviderGatewayFactory,
             IUserDataAccess userDataAccess,
             ITransactionsDataAccess transactionsDataAccess
     ){
-        if(transactionType == TransactionType.TRANSFER_TO_BANK){
+        System.out.println(transactionType+" "+TransactionType.transferToBankAccount.toString());
+        if(transactionType.equals(TransactionType.transferToBankAccount.toString())){
             return new TransferToBankAccountService(
                     data,
                     userDataAccess,
@@ -36,7 +37,7 @@ public class TransferFactory {
                     transferAuthorizerService,
                     accountProviderGatewayFactory
                     );
-        }else if(transactionType == TransactionType.TRANSFER_TO_WALLET){
+        }else if(transactionType.equals(TransactionType.transferToWalletAccount.toString())){
             return new TransferToWalletAccountService(
                     data,
                     userDataAccess,
@@ -44,7 +45,7 @@ public class TransferFactory {
                     transferAuthorizerService,
                     accountProviderGatewayFactory
             );
-        }else if(transactionType == TransactionType.TRANSFER_TO_INSTAPAY){
+        }else if(transactionType.equals(TransactionType.transferToInstaPayAccount.toString())){
             return new TransferToInstaPayAccountService(
                     data,
                     userDataAccess,

@@ -28,6 +28,7 @@ public class MockWalletDB {
     private static void seedMockDB() {
         mockWalletDB = new HashMap<>();
         mockWalletDB.put("01234567890", new MockWalletUser("01234567890", 10000.0));
+        mockWalletDB.put("01157077022", new MockWalletUser("01157077022", 12000.0));
         mockWalletDB.put("01020210069", new MockWalletUser("01020210069", 10000.0));
         mockWalletDB.put("01020210033", new MockWalletUser("01020210033", 1500.0));
         mockWalletDB.put("01020210084", new MockWalletUser("01020210084", 1500.0));

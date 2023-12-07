@@ -11,7 +11,7 @@ public class MockBankAccountProviderGateway implements IAccountProviderGateway {
 
     @Override
     public void depositMoney(IUser user,double amount) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;
@@ -23,7 +23,7 @@ public class MockBankAccountProviderGateway implements IAccountProviderGateway {
     }
 
     public void withdrawMoney(IUser user,double amount) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;
@@ -39,7 +39,7 @@ public class MockBankAccountProviderGateway implements IAccountProviderGateway {
 
     @Override
     public double getBalance(IUser user) throws CustomException {
-        if(user.getInstaPayAccount().getAccountType() != AccountType.BANK_USER){
+        if(user.getInstaPayAccount().getAccountType() != AccountType.bankAccount){
             throw new CustomException(StatusCodes.UNAUTHORIZED,"User Is not a bankUser");
         }
         BankUser bankUser = (BankUser) user;

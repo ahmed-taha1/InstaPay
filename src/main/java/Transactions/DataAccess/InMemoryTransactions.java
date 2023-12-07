@@ -10,9 +10,9 @@ public class InMemoryTransactions implements ITransactionsDataAccess {
 
     private InMemoryTransactions() {
         this.transactionsDB = new HashMap<>();
-        transactionsDB.put(1, new Transaction(1, 100, "011202924543", "ahmed taha", TransactionType.PAY_BILL, new Date()));
-        transactionsDB.put(2, new Transaction(2, 1020, "01125345230", "ahmed hany", TransactionType.TRANSFER_TO_WALLET, new Date()));
-        transactionsDB.put(3, new Transaction(3, 10324, "011253245230", "ismail magdy", TransactionType.TRANSFER_TO_BANK, new Date()));
+        transactionsDB.put(1, new Transaction(1, 100, "011202924543", "ahmed taha", TransactionType.payBill, new Date()));
+        transactionsDB.put(2, new Transaction(2, 1020, "01125345230", "ahmed hany", TransactionType.transferToWalletAccount, new Date()));
+        transactionsDB.put(3, new Transaction(3, 10324, "011253245230", "ismail magdy", TransactionType.transferToBankAccount, new Date()));
     }
 
     public static InMemoryTransactions getInstance() {
